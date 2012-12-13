@@ -1,0 +1,7 @@
+*.pyc
+env
+*.txt
+bashplotlib.egg-info
+build
+dist
+

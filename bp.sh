@@ -70,3 +70,4 @@ for y in $(seq $max_y $y_inc $min_y)
 x_max=`echo "$n_bins*3" | bc`
  
 seq -s "-" $x_max | sed 's/[0-9]//g'
+seq -s " " $min_val $bin_size $max_val | sed 's/[.][0-9]+//g'

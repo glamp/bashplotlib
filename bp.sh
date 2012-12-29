@@ -32,25 +32,28 @@ for n in $(seq $min_val $bin_size $max_val)
         lines=`sort -n $fname | tail -n+$lines_done`
         n_lower=`echo "$n - $bin_size" | bc`
         size=`cat $fname | awk -v nl=$n_lower -v nu=$n '{ print (($1 < nu) == ($1 > nl)) ? "true" : "false"}' | grep "true" | wc -l`
+        size=`echo "scale=2; 1000*($size/$n_records)" | bc`
+        size=`echo "scale=0; $size/1" | bc`
         bars=("${bars[@]}" $size)
         lines_done=$((lines_done+$size))
     done
  
 min_y=`echo ${bars[@]} | awk -v RS=" " '1'| sort -nr | tail -n 2`
 max_y=`echo ${bars[@]} | awk -v RS=" " '1'| sort -nr | head -n 1`
+
+
 echo
 echo "  Bashplot"
 echo
 
-y_inc=`echo "-1*($max_y-$min_y)/50" | bc`
+y_inc=`echo "-1*($max_y-$min_y)/20" | bc`
 y_inc=${y_inc/.*} 
 
 for y in $(seq $max_y $y_inc $min_y)
     do
-        y_line="| "
+        y_line="$y |"
         for bar in ${bars[@]}
             do
-#                echo $bar
                 if [[ $bar -ge $y ]]; then
                     y_line="$y_line o"
                 else

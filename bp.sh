@@ -66,13 +66,20 @@ echo
 
  
 x_max=`echo "$n_bins*3" | bc`
-x_axis_inc=`calc_axis_ticks $min_val $x_max 5`
+x_axis_inc=`calc_axis_ticks $min_val $x_max 50`
 y_axis_inc=`calc_axis_ticks 0 $max_y 25`
 
-
+show_y_scale="YES"
 for y in $(seq $max_y -$y_axis_inc $min_y)
     do
-        y_line=`printf '%5s |' $y`
+        if [[ "$show_y_scale" = "NO" ]]; then
+            show_y_scale="YES"    
+            y_line=`printf '%5s |' " "`
+        else
+            show_y_scale="NO"
+            y_line=`printf '%5s |' $y`
+        fi
+
         for bar in ${bars[@]}
             do
                 if [[ $bar -ge $y ]]; then
@@ -90,8 +97,13 @@ for y in $(seq $max_y -$y_axis_inc $min_y)
  
 
 printf "       " 
-seq -s "-" $x_max | sed 's/[0-9]//g'
-#printf "       "
-#seq -s "   " $min_val $x_axis_inc $x_max | sed -e 's/\.[0-9]*//g' -e 's/ *$//'
-
+x_axis=`seq -s "-" $x_max | sed 's/[0-9]//g'`
+echo $x_axis
+printf "     "
+x_labs=`seq -s "   " $min_val $x_axis_inc $x_max | sed -e 's/\.[0-9]*//g' -e 's/ *$//'`
+x_len=${#x_axis}
+#echo $x_labs
+#echo $x_len
+printf "%3s " ${x_labs:0:$x_len}
+echo
 

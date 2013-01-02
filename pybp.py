@@ -53,7 +53,7 @@ for x in range(len(plt)):
         iy = func(ix) + max_y/2
         if iy < len(plt):
             plt[iy][x] = shape
-# print list_to_plot(plt)
+print list_to_plot(plt)
 
 
 

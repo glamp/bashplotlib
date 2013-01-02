@@ -1,6 +1,24 @@
 #!/bin/bash
 
+
+calc_axis_ticks() {
+    local y_min=$1
+    local y_max=$2
+    local tickCount=$3
+
+    local range=`echo "$y_max-$y_min" | bc`
+
+    local unroundedTickSize=`echo "$range/($tickCount-1)" | bc`
+    local x=`echo "l($unroundedTickSize)/l(10)-1" | bc -l`
+    local pow10x=`echo "10^$x" | bc -l`
+    local roundedTickRange=`echo "($unroundedTickSize / $pow10x) * $pow10x" | bc -l`
+    echo "$roundedTickRange"
+}
+
+
 fname=$1
+shape=${2:-o}
+
 nums=`cat $fname`
 
 ncount=`cat $fname | sort -n | uniq -c`
@@ -46,28 +64,34 @@ echo
 echo "  Bashplot"
 echo
 
-y_inc=`echo "-1*($max_y-$min_y)/20" | bc`
-y_inc=${y_inc/.*} 
+ 
+x_max=`echo "$n_bins*3" | bc`
+x_axis_inc=`calc_axis_ticks $min_val $x_max 5`
+y_axis_inc=`calc_axis_ticks 0 $max_y 25`
 
-for y in $(seq $max_y $y_inc $min_y)
+
+for y in $(seq $max_y -$y_axis_inc $min_y)
     do
-        y_line="$y |"
+        y_line=`printf '%5s |' $y`
         for bar in ${bars[@]}
             do
                 if [[ $bar -ge $y ]]; then
-                    y_line="$y_line o"
+                    y_line="$y_line $shape"
                 else
                     y_line="$y_line  "
                 fi
             done
-        n_valid=`grep -o "o" <<<"$y_line" | wc -l`
+        n_valid=`grep -o "$shape" <<<"$y_line" | wc -l`
         if [[ $n_valid -ne $n_bins ]]; then
             echo "$y_line"
             x=1
         fi
     done
  
-x_max=`echo "$n_bins*3" | bc`
- 
+
+printf "       " 
 seq -s "-" $x_max | sed 's/[0-9]//g'
-seq -s " " $min_val $bin_size $max_val | sed 's/[.][0-9]+//g'
+#printf "       "
+#seq -s "   " $min_val $x_axis_inc $x_max | sed -e 's/\.[0-9]*//g' -e 's/ *$//'
+
+

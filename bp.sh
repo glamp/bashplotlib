@@ -69,6 +69,9 @@ x_max=`echo "$n_bins*3" | bc`
 x_axis_inc=`calc_axis_ticks $min_val $x_max 50`
 y_axis_inc=`calc_axis_ticks 0 $max_y 25`
 
+echo 'HERE are the bars:'
+echo "${bars[@]}"
+
 show_y_scale="YES"
 for y in $(seq $max_y -$y_axis_inc $min_y)
     do
@@ -82,7 +85,7 @@ for y in $(seq $max_y -$y_axis_inc $min_y)
 
         for bar in ${bars[@]}
             do
-                if [[ $bar -ge $y ]]; then
+                if [[ $bar >= $y ]]; then
                     y_line="$y_line $shape"
                 else
                     y_line="$y_line  "

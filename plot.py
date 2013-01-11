@@ -1,6 +1,6 @@
 import string
 import math
-
+from collections import OrderedDict
 
 def frange(start, stop, step):
     r = start
@@ -8,21 +8,40 @@ def frange(start, stop, step):
         yield r
         r += step
 
+def dist(x1, y1, x2, y2):
+    return math.sqrt((y2-y1)**2 + (x2-x1)**2)
 
 
 class Plot(object):
     def __init__(self, size=21):
+        self.size = size
+        if self.size % 2 == 0:
+            self.size += 1
         self.xaxis = list("-"*size)
+        self.area = None
 
+    def _setup_axis(self, xmin, xmax, ymin, ymax):
+        self.y_axis = OrderedDict()
+        self.x_axis = OrderedDict()
+        for pos, y in enumerate(frange(ymin, ymax, (ymax-ymin)/float(self.size))):
+            self.y_axis[y] = pos
+        for pos, x in enumerate(frange(xmin, xmax, (xmax-xmin)/float(self.size))):
+            self.x_axis[x] = self.size- 1 - pos
 
     def _create_area(self, xmin, xmax, ymin, ymax):
+        self._setup_axis(xmin, xmax, ymin, ymax)
         self.area = []
         size = max([ymax - ymin, xmax - xmin])
-        xmid = 10*(xmax - xmin)/20. + xmin
-        ymid = 10*(ymax - ymin)/20. + ymin
-        for y in frange(ymin, ymax, (ymax-ymin)/20.):
+        xmid = 0#(xmax - xmin)/float(self.size) + xmin
+        ymid = 0#(self.size/2)*(ymax - ymin)/float(self.size) + ymin
+        print xmid
+        print ymid
+        print xmin, xmax
+        print ymin, ymax
+        for y in frange(ymin, ymax, (ymax-ymin)/float(self.size)):
             row = []
-            for x in frange(xmin, xmax, (xmax-xmin)/20.):
+            for x in frange(xmin, xmax, (xmax-xmin)/float(self.size)):
+                #print x, y
                 if y==ymid:
                     ch = "-"
                 elif x==xmid:
@@ -30,14 +49,22 @@ class Plot(object):
                 else:
                     ch = " "
                 row.append(ch)
-
             self.area.append(row)
-        self.area.reverse()
+        self.area.reverse() 
 
     def _add(self, x, y, pch="x"):
-        if 
-        self.area[y][x] = pch
-    
+        xpos, ypos = None, None
+        for i in self.x_axis:
+            if i <= x:
+                xpos = self.x_axis[i]
+        for i in self.y_axis:
+            if i <= y:
+                ypos = self.y_axis[i]
+        if xpos and ypos:
+            self.area[ypos][xpos] = pch
+
+
+
     def _add_list(self, points):
         for point in points:
             self._add(point[0], point[1])
@@ -46,14 +73,15 @@ class Plot(object):
         for row in self.area:
             yield "".join(row)
 
-    def plot(self, points):
-        self.points = PointSet(points, "x")
-        self._create_area(self.points.x_min, self.points.x_max,
-                          self.points.y_min, self.points.y_max)
-        for p in self.points.points:
-            self._add(p.x, p.y, p.pch)
-            print p.x, p.y
+    def plot(self, points, pch="x"):
+        self.points = PointSet(points, pch)
+        if self.area is None:
+            self._create_area(self.points.x_min, self.points.x_max,
+                              self.points.y_min, self.points.y_max)
+        for p in self.points:
+            self._add(p.x, p.y, pch)
 
+    def show(self):
         for row in self._render():
             print row
 
@@ -63,6 +91,7 @@ class PointSet(object):
         self.points = []
         self.x_min, self.x_max = 999999, -999999
         self.y_min, self.y_max = 999999, -999999
+        
         for (x, y) in points: 
             self.points.append(Point(x, y, pch=pch))
             if x > self.x_max:
@@ -75,7 +104,9 @@ class PointSet(object):
             if y < self.y_min:
                 self.y_min = y
 
-
+    def __iter__(self):
+        for point in self.points:
+            yield point
 
 class Point(object):
     def __init__(self, x, y, pch="x"):
@@ -84,16 +115,16 @@ class Point(object):
         self.pch = pch
 
 
-p = Plot()
 
 f1 = lambda x: x**2
-f2 = lambda x: math.log(x)
-
+f2 = lambda x: (2*x + 4)
+f3 = lambda x: math.exp(x)
 xs = range(-10, 10)
 
+p = Plot(size=20)
+points = [(x, f3(x)) for x in range(0, 10, 1)]
+p.plot(points, "x")
 
-points = [(x, f1(x)) for x in range(-10, 10)]
-p.plot(points)
-
+p.show()
 
 

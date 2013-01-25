@@ -1,6 +1,7 @@
 import math
 from collections import Counter
 import optparse
+import sys
 
 
 def drange(start, stop, step=1.0):
@@ -18,14 +19,23 @@ def calc_bins(n, min_val, max_val, h=None):
     for b in drange(min_val, max_val, bin_width):
         yield b
 
-def plot_hist(f, height=20, bincount=None):
+def read_numbers(numbers):
+    if isinstance(numbers, list):
+        for n in numbers:
+            yield float(n.strip())
+    else:
+        for n in open(numbers):
+            yield float(n.strip())
+
+def plot_hist(f, height=20, bincount=None, pch="o"):
     "plot a histogram given a file of numbers"
     #first apss
+    if pch is None:
+        pch = "o"
     min_val, max_val = None, None
     n = 0.
-    for number in open(f):
+    for number in read_numbers(f):
         n += 1
-        number = float(number)
 
         if not min_val or number < min_val:
             min_val = number
@@ -34,8 +44,7 @@ def plot_hist(f, height=20, bincount=None):
 
     bins = list(calc_bins(n, min_val, max_val, bincount))
     hist = Counter()
-    for number in open(f):
-        number = float(number)
+    for number in read_numbers(f):
         for i, b in enumerate(bins):
             if number < b:
                 hist[i-1] += 1
@@ -60,7 +69,7 @@ def plot_hist(f, height=20, bincount=None):
 
         for i in range(len(hist)):
             if y < hist[i]:
-                print "o",
+                print pch,
             else:
                 print " ",
         print
@@ -71,14 +80,14 @@ def plot_hist(f, height=20, bincount=None):
     for i in range(0, nlen):
         print " "*(nlen+1),
         for x in range(0, len(hist)):
-            n = str(bins[x])
+            num = str(bins[x])
             if x%2==0:
                 print " ",
-            elif i < len(n):
-                print n[i],
+            elif i < len(num):
+                print num[i],
         print
 
-    summary = "Summary\n--------\nMax: %s\nMin:%s" % (min_val, max_val)
+    summary = "Summary\n--------\nMax: %s\nMin: %s\nCount: %s" % (min_val, max_val, int(n))
     print summary
 
 
@@ -89,15 +98,15 @@ if __name__=="__main__":
                       default=None, dest='f')
     parser.add_option('-b', '--bins', help='number of bins in the histogram',
                       default=None, dest='b')
-    parser.add_option('-s', help='height of the histogram (in lines)',
+    parser.add_option('-s', '--height', help='height of the histogram (in lines)',
                       default=20, dest='h')
-
+    parser.add_option('-p', '--pch', help='shape of each bar', default='o', dest='p')
     (opts, args) = parser.parse_args()
     
     if opts.f is None:
         opts.f = args[0]
     
-    plot_hist(opts.f, opts.h, opts.b)
+    plot_hist(opts.f, opts.h, opts.b, opts.p)
 
 
 

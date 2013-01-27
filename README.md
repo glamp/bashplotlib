@@ -1,50 +1,74 @@
 Bashplot
 
-    ./bp.sh data/numbers.txt
-		220 |                 o            
-		209 |                 o            
-		198 |                 o            
-		187 |                 o            
-		176 |               o o            
-		165 |               o o            
-		154 |               o o            
-		143 |               o o            
-		132 |             o o o o          
-		121 |             o o o o          
-		110 |             o o o o          
-		99  |             o o o o          
-		88  |             o o o o          
-		77  |           o o o o o o        
-		66  |           o o o o o o        
-		55  |           o o o o o o        
-		44  |           o o o o o o        
-		33  |         o o o o o o o        
-		22  |         o o o o o o o o      
-		11  |         o o o o o o o o      
-		0   | o o o o o o o o o o o o o o o
+		python bin/scatter.py -f data/texas.txt
+		------------------------------------------
+		|             x x x x x x                 |
+		|             x         x                 |
+		|             x         x                 |
+		|             x         x x               |
+		|             x           x x x x x x x   |
+		|             x                 x x x x x |
+		|             x                           |
+		|             x                           |
+		| x x   x   x x                           |
+		|   x x                                   |
+		|     x x                                 |
+		|       x x                               |
+		|       x x     x x x                 x x |
+		|         x x x     x x               x x |
+		|           x x       x           x x x   |
+		|                     x x       x x       |
+		|                       x     x x         |
+		|                       x x   x x         |
+		|                         x   x x         |
+		|                         x x x x         |
 		------------------------------------------
 
+    python bin/hist.py data/exp.txt
+		461 | o                
+		438 | o                
+		415 | o                
+		392 | o                
+		369 | o                
+		346 | o                
+		323 | o                
+		300 | o                
+		277 | o                
+		254 | o o              
+		231 | o o              
+		208 | o o              
+		185 | o o              
+		162 | o o              
+		139 | o o              
+		116 | o o o            
+		93  | o o o            
+		70  | o o o o          
+		47  | o o o o          
+		24  | o o o o o        
+		1   | o o o o o o o o  
+		     ------------------
 
-    ./bp.sh data/exp.txt
-        470 |   o                  
-		447 |   o                  
-		424 |   o                  
-		401 |   o                  
-		378 |   o                  
-		355 |   o                  
-		332 |   o                  
-		309 |   o                  
-		286 |   o                  
-		263 |   o                  
-		240 |   o o                
-		217 |   o o                
-		194 |   o o                
-		171 |   o o                
-		148 |   o o                
-		125 |   o o                
-		102 |   o o o              
-		79  |   o o o              
-		56  |   o o o o            
-		33  |   o o o o            
-		10  |   o o o o o o o      
-		------------------------------
+    python bin/scatter.py -x data/x_test.txt -y data/y_test.txt 
+		--------------------------------------------
+		|                                     x     |
+		|                                           |
+		|                             x             |
+		|                                           |
+		|                                           |
+		|                                           |
+		|                                           |
+		|                                           |
+		|                                           |
+		|                                           |
+		|                         x                 |
+		|                                           |
+		|                                           |
+		|                                           |
+		|           x                               |
+		|                                           |
+		|                                           |
+		|       x                                   |
+		|                                           |
+		| x             x                 x         |
+		--------------------------------------------
+

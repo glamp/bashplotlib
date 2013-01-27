@@ -74,9 +74,3 @@ if __name__=="__main__":
     
     plot_scatter(opts.f, opts.x, opts.y, opts.size, opts.pch)
 
-#plot_scatter("test.txt")
-#plot_scatter("bigtest.txt")
-#plot_scatter("texas.txt")
-
-
-

@@ -109,8 +109,3 @@ if __name__=="__main__":
     
     plot_hist(opts.f, opts.h, opts.b, opts.p)
 
-
-
-
-
-

@@ -73,87 +73,85 @@
 	|                   |                 x     |
 	|                   |                     x |
 	--------------------------------------------
-<pre>bin/scatter.py -f data/usa.txt -s 80 -p .</pre>
-	--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	|                                 .                                                                                                                                 |
-	|                             . . . . . .                                                                                                                           |
-	|                         . . .         . . . .   . . .                                                                                                             |
-	|                       .                         . . . .                                                                                                           |
-	|                   . . .                                                                                                                                           |
-	|                   .                                   .                                                                                                           |
-	|                     . .                                                                                                                                           |
-	|                       . . .                                                                                                                                       |
-	|                   . . . . .                                                                                                                                       |
-	|                 . . . . . .                           .                                                                                                           |
-	|                 . .       .                                                                                                                                       |
-	|                   . . . . .                                                                                                                                       |
-	|           . .           . .                                                                                                                                       |
-	|           . . .     . . . .                                                                                                                                       |
-	|                     .                                                                                                                                             |
-	|                   . .                                 .                                                                                                           |
-	|                   . . .                 . . . .                                                                                                                   |
-	|         . .       . . . .             . . . . . . .   . . .                                                                                                       |
-	|                 . . . . .           . . . . . .   . . . . .   .                                                                                                   |
-	|                         . . . . .   . . . .             . . . . .                                                                                                 |
-	|                         . . . . .   . .                   . . . . .                                                                                               |
-	|                               . . . . .                     . . . .                                                                                               |
-	|                               . . . . .                       . . . .                                                                                             |
-	|                             . . .   .                         . . . . .                                                                                           |
-	|                         . . . .                                 . . . .                                                                                           |
-	|                       . . . .                                     . . .                                                                                           |
-	|                     . . .                                         . . .                                                                                           |
-	|                 . .                                                                                                                                               |
-	|               . . .                                                                                                                                               |
-	|       .       .                                                                                                                                                   |
-	| . . . . .                                                                                                                                                         |
-	|   . .                                                                                                                                                             |
-	|                                                                                                                                                                   |
-	|                                                                                                                                                                   |
-	|                                                                                                                         .                                         |
-	|                                                                                 . . . . . . . . . . . . . . . . . . . . . . .                                     |
-	|                                                                               . . .     . .                 .         .     . . . .                               |
-	|                                                                               . . .     . . .               .         .       . . . .                         . . |
-	|                                                                               . .       .   .               .         .     . . . . . . .                   .   . |
-	|                                                                               . .   . . . . .               . . . . . .     .   . . . . . .                 .   . |
-	|                                                                                 . . .     . . .             .         .     .     . . . . .               . .   . |
-	|                                                                               .         . .   . . . . . . . .         .     .     . . .   .         . . . . . . . |
-	|                                                                               .         . .   . . .         .         .     . .     . . . .         .   . . . . . |
-	|                                                                               .         . .       .         .         . . . . .   . . . . .     . . .   . . . .   |
-	|                                                                               .                   .         . . . . . .       .   . . .   .     .       . . .     |
-	|                                                                               . . . . . . . . . . .         .         . .     . . . . .   .   . . . . . . . .     |
-	|                                                                               .                   .         .           .     . .   . . . . . .       . . . .     |
-	|                                                                               .     .         .   . . . . . . .         . . . .     .   .     .       . . .       |
-	|                                                                               .               .     .         . . . . . . .   .     .   .     .       .           |
-	|                                                                                 .   .         .     .         .         .     .     .   .   . . . . . .           |
-	|                                                                                 .   . .       .               .         . .   . .   . . . . . . . . . .           |
-	|                                                                                 . .   .       .     .         .           .     . . . .   . . . . . . .           |
-	|                                                                                 . .     .     .     .         .           .     . . .     . . .   . .             |
-	|                                                                                   .     .     . . . . . . . . . . . . . . .     . . . .   . .     . .             |
-	|                                                                                   .       . . .     .         . . .       . . . . .   . . . . . . . .             |
-	|                                                                                   . .       .                 .   .       .     .       . .       . .             |
-	|                                                                                     .       .       .         .   .       .     . . . . . . . .   . .             |
-	|                                                                                     . .     . .     .         .   . .     .   . . .   .   .     . . .             |
-	|                                                                                     . . .   .       .         .     . . . .   .   .   .   . .   . .               |
-	|                                                                                       . .   .       .         .           . . .   .   .     . . .                 |
-	|                                                                                         . . .       .         .           .   .   .   . .   . .                   |
-	|                                                                                               .   .   . . . . .           .   .   .   . .   .                     |
-	|                                                                                                   . . .   .               .   . . . . . .   .                     |
-	|                                                                                                           .               .     . . . . . . .                     |
-	|                                                                                                           . . . .       . . . . .     . . . .                     |
-	|                                                                                                             . . .     . . .   . . .       . . .                   |
-	|                                                                                                                 . .   . .                 .   .                   |
-	|                                                                                                                   .   .                   .   .                   |
-	|                                                                                                                   . . .                   . . .                   |
-	|                                                                                                                   . . .                     . .                   |
-	|                                                                                                                     . .                     . .                   |
-	|                                                                                                                                             . .                   |
-	|                                                                                                                                                                   |
-	|                                                                                                                                                                   |
-	|                                                                                                                                                                   |
-	|                             .                                                                                                                                     |
-	|                           . . .                                                                                                                                   |
-	|                               . .                                                                                                                                 |
-	|                                 . .                                                                                                                               |
-	|                                 . .                                                                                                                               |
-	|                                   .                                                                                                                               |
-	--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<pre>bin/scatter.py -f data/lower48.txt -s 80</pre>
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	|                                                                                   x x                                                                           |
+	|       x     x     x x x   x x x     x x x   x x   x x   x x   x x x x x x   x x x x x                                                                           |
+	|       x x                 x                               x                   x     x x x x                                                                     |
+	|   x   x x                 x                               x                   x           x x x       x                                                         |
+	| x x x x x             x   x                               x                   x             x x x x x x                                                         |
+	|   x   x x                 x                                                   x                 x x x                                                           |
+	|   x   x x             x   x x                             x                   x               x                                                           x x x |
+	|   x x x               x     x                                                 x               x                                                             x x |
+	|   x x                       x x                                               x           x x   x                                                       x       |
+	|   x x                 x       x                           x                   x           x   x x                                                       x       |
+	|   x x x               x       x                           x                   x x         x     x x x                                                   x       |
+	|     x x     x x x   x x x     x                           x   x x   x x x x x x x         x         x x x                                               x     x |
+	|     x x x x x x         x     x x                                             x           x             x                                             x x     x |
+	|     x                   x       x                         x                   x x         x             x                                           x x         |
+	|     x                 x x       x     x x x   x x   x   x x                     x         x             x                                 x x x x x x           |
+	|   x                   x         x x x x                   x                     x         x           x x                                 x     x   x x     x x |
+	|   x                   x           x x x                                                   x x           x                               x       x x x x     x x |
+	|                       x               x                   x                     x           x x         x                             x x       x x     x x x   |
+	|   x                   x                                   x                     x             x         x                               x       x x   x x x     |
+	|   x                                   x                   x                   x x x x x x x x x         x                         x x x x       x x   x x       |
+	|   x                                   x                                       x x             x         x                       x   x x         x x   x         |
+	|   x                                                       x x x x x x x x x x x x             x         x                       x               x x x x         |
+	|   x                                   x                   x                   x x             x x x x x x                     x x               x     x         |
+	|   x                                                                             x               x       x                     x                       x         |
+	|   x x x x x x x x   x x   x x x   x x x                   x                     x               x       x                 x x x x x x x x x   x x x x x x       |
+	|   x                                   x                   x                     x               x       x x x x x x x x x x x             x   x     x x x       |
+	|   x                                   x                   x                     x             x x       x       x   x x x   x             x x x x x x x         |
+	|   x           x               x       x   x x   x x x x x x x x x               x x           x         x       x           x             x x x x               |
+	|                                             x                   x               x x     x x x x         x       x           x             x x x                 |
+	|   x                                                             x                 x x x x   x x         x       x           x             x x x                 |
+	|   x x                         x             x                   x x x x x x x x x x           x         x       x         x x             x x x                 |
+	|     x         x               x                                                   x x         x         x       x         x x x x x x x x x   x                 |
+	|     x         x               x             x                   x                   x         x         x       x       x x     x x x x x x x                   |
+	|     x         x                             x                   x                   x         x x       x       x       x x   x   x x x x x x                   |
+	|     x         x                                                 x                   x           x       x       x x   x x       x   x x x x x                   |
+	|     x           x             x             x                   x                   x           x       x     x   x x x       x x   x x x                       |
+	|       x x x     x                           x                   x                   x           x     x x   x x       x       x     x x x x                     |
+	|       x x x       x           x             x                                       x           x x   x x x x         x     x x       x x x                     |
+	|         x                     x             x                   x                   x             x   x x x           x x   x         x x                       |
+	|         x           x                                           x                   x             x   x               x x x x         x x                       |
+	|         x             x       x   x x x x x x x x x x x x x x x x x x x x x x x x x x             x x x             x x x x           x x                       |
+	|         x x                   x                                                     x               x x x x x       x                 x x                       |
+	|         x                                                     x x x x x             x x x x x x x x x x x   x x x x x x x x x x x x x x x                       |
+	|         x x                 x x                               x       x             x           x x                   x x             x x                       |
+	|           x               x x x             x                 x       x             x           x x                 x x               x x                       |
+	|           x x               x                                 x       x             x           x x               x x               x x x                       |
+	|             x               x x                               x       x             x           x x               x   x x x           x x                       |
+	|             x               x x             x                 x       x             x           x x x x x x x x x x x x   x         x x x                       |
+	|             x                 x             x                 x       x             x           x     x       x     x     x x x     x x                         |
+	|             x x x             x                               x       x x           x         x x     x       x     x x         x   x                           |
+	|                 x x           x                                         x x x x   x x         x       x       x       x         x x                             |
+	|                   x x         x             x                 x             x x x x x         x       x       x       x         x x                             |
+	|                     x       x x                               x                     x x       x       x       x       x x       x                               |
+	|                       x     x x             x                                         x x x x x       x       x         x     x x                               |
+	|                       x     x x             x                 x                       x       x       x       x         x x   x                                 |
+	|                       x x   x               x                 x                       x       x       x       x x       x x x x                                 |
+	|                                                                                       x       x       x       x x         x x                                   |
+	|                                 x                   x   x x x x                       x       x       x       x           x                                     |
+	|                                               x   x x                                 x       x       x       x           x                                     |
+	|                                       x x   x x     x                                 x x   x x       x       x         x x                                     |
+	|                                                       x                                 x   x x x x   x x x x x x       x x                                     |
+	|                                                       x x                             x x         x   x x x     x x x x x                                       |
+	|                                                         x                             x         x x x x x x x x       x x                                       |
+	|                                                         x                             x x       x x   x x   x x x x     x                                       |
+	|                                                         x     x x x                 x x x   x     x           x x x x     x                                     |
+	|                                                           x   x   x                 x x   x x x x x                 x     x                                     |
+	|                                                           x x x     x             x x         x x x x               x x   x                                     |
+	|                                                             x       x           x x               x x                 x   x                                     |
+	|                                                                     x         x x x                                   x   x                                     |
+	|                                                                     x         x x                                     x   x                                     |
+	|                                                                       x     x x                                       x     x                                   |
+	|                                                                       x     x x                                       x     x                                   |
+	|                                                                       x     x                                         x     x                                   |
+	|                                                                         x   x                                         x x   x                                   |
+	|                                                                         x   x                                         x x   x                                   |
+	|                                                                         x   x                                           x                                       |
+	|                                                                           x x x                                         x   x                                   |
+	|                                                                           x x x                                         x x x                                   |
+	|                                                                                                                           x x                                   |
+	|                                                                                                                           x x                                   |

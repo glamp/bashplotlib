@@ -1,28 +1,28 @@
 Bashplot
 
 		python bin/scatter.py -f data/texas.txt
-		------------------------------------------
-		|             x x x x x x                 |
-		|             x         x                 |
-		|             x         x                 |
-		|             x         x x               |
-		|             x           x x x x x x x   |
-		|             x                 x x x x x |
-		|             x                           |
-		|             x                           |
-		| x x   x   x x                           |
-		|   x x                                   |
-		|     x x                                 |
-		|       x x                               |
-		|       x x     x x x                 x x |
-		|         x x x     x x               x x |
-		|           x x       x           x x x   |
-		|                     x x       x x       |
-		|                       x     x x         |
-		|                       x x   x x         |
-		|                         x   x x         |
-		|                         x x x x         |
-		------------------------------------------
+------------------------------------------
+|             x x x x x x                 |
+|             x         x                 |
+|             x         x                 |
+|             x         x x               |
+|             x           x x x x x x x   |
+|             x                 x x x x x |
+|             x                           |
+|             x                           |
+| x x   x   x x                           |
+|   x x                                   |
+|     x x                                 |
+|       x x                               |
+|       x x     x x x                 x x |
+|         x x x     x x               x x |
+|           x x       x           x x x   |
+|                     x x       x x       |
+|                       x     x x         |
+|                       x x   x x         |
+|                         x   x x         |
+|                         x x x x         |
+------------------------------------------
 
 
     python bin/hist.py data/exp.txt

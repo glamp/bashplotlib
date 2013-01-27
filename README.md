@@ -1,26 +1,26 @@
 <h2>Bashplot</h2>
-<pre>python bin/scatter.py -f data/texas.txt</pre>
+<pre>python bin/scatter.py -f data/texas.txt --pch .</pre>
 	------------------------------------------
-	|             x x x x x x                 |
-	|             x         x                 |
-	|             x         x                 |
-	|             x         x x               |
-	|             x           x x x x x x x   |
-	|             x                 x x x x x |
-	|             x                           |
-	|             x                           |
-	| x x   x   x x                           |
-	|   x x                                   |
-	|     x x                                 |
-	|       x x                               |
-	|       x x     x x x                 x x |
-	|         x x x     x x               x x |
-	|           x x       x           x x x   |
-	|                     x x       x x       |
-	|                       x     x x         |
-	|                       x x   x x         |
-	|                         x   x x         |
-	|                         x x x x         |
+	|             . . . . . .                 |
+	|             .         .                 |
+	|             .         .                 |
+	|             .         . .               |
+	|             .           . . . . . . .   |
+	|             .                 . . . . . |
+	|             .                           |
+	|             .                           |
+	| . .   .   . .                           |
+	|   . .                                   |
+	|     . .                                 |
+	|       . .                               |
+	|       . .     . . .                 . . |
+	|         . . .     . .               . . |
+	|           . .       .           . . .   |
+	|                     . .       . .       |
+	|                       .     . .         |
+	|                       . .   . .         |
+	|                         .   . .         |
+	|                         . . . .         |
 	------------------------------------------
 
 

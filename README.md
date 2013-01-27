@@ -24,6 +24,7 @@ Bashplot
 		|                         x x x x         |
 		------------------------------------------
 
+
     python bin/hist.py data/exp.txt
 		461 | o                
 		438 | o                
@@ -47,6 +48,7 @@ Bashplot
 		24  | o o o o o        
 		1   | o o o o o o o o  
 		     ------------------
+
 
     python bin/scatter.py -x data/x_test.txt -y data/y_test.txt 
 		--------------------------------------------

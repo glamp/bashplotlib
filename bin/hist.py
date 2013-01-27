@@ -5,6 +5,27 @@ import optparse
 import sys
 
 
+bcolours = {
+    "white": '\033[97m',
+    "aqua": '\033[96m',
+    "pink": '\033[95m',
+    "blue": '\033[94m',
+    "yellow": '\033[93m',
+    "green": '\033[92m',
+    "red": '\033[91m',
+    "grey": '\033[90m',
+    "ENDC": '\033[0m'
+}
+
+def get_colour(colour):
+    return bcolours.get(colour, bcolours['white'])
+
+def printcolor(txt, sameline=False, color=get_colour("white")):
+    if sameline:
+        print color + txt + bcolours["ENDC"],
+    else:
+        print color + txt + bcolours["ENDC"]
+
 def drange(start, stop, step=1.0):
     "generate between 2 numbers w/ optional step"
     r = start
@@ -28,11 +49,14 @@ def read_numbers(numbers):
         for n in open(numbers):
             yield float(n.strip())
 
-def plot_hist(f, height=20, bincount=None, pch="o"):
+def plot_hist(f, height=20, bincount=None, pch="o", colour="white"):
     "plot a histogram given a file of numbers"
     #first apss
     if pch is None:
         pch = "o"
+    
+    colour = get_colour(colour)
+
     min_val, max_val = None, None
     n = 0.
     for number in read_numbers(f):
@@ -66,26 +90,26 @@ def plot_hist(f, height=20, bincount=None, pch="o"):
         ylab = str(y)
         ylab += " "*(nlen - len(ylab)) + "|"
 
-        print ylab,
+        printcolor(ylab, True, colour)
 
         for i in range(len(hist)):
             if y < hist[i]:
-                print pch,
+                printcolor(pch, True, colour)
             else:
-                print " ",
+                printcolor(" ", True, colour)
         print
     xs = hist.keys() * 2
 
-    print " "*(nlen+1) + "-"*len(xs)
+    printcolor(" "*(nlen+1) + "-"*len(xs), False, colour)
 
     for i in range(0, nlen):
-        print " "*(nlen+1),
+        printcolor(" "*(nlen+1), True, colour)
         for x in range(0, len(hist)):
             num = str(bins[x])
             if x%2==0:
-                print " ",
+                printcolor(" ", True, colour)
             elif i < len(num):
-                print num[i],
+                printcolor(num[i], True, colour)
         print
 
     summary = "Summary\n--------\nMax: %s\nMin: %s\nCount: %s" % (min_val, max_val, int(n))
@@ -102,10 +126,12 @@ if __name__=="__main__":
     parser.add_option('-s', '--height', help='height of the histogram (in lines)',
                       default=20, dest='h')
     parser.add_option('-p', '--pch', help='shape of each bar', default='o', dest='p')
+    parser.add_option('-c', '--colour', help='colour of the plot', default='white', dest='colour')
+
     (opts, args) = parser.parse_args()
     
     if opts.f is None:
         opts.f = args[0]
     
-    plot_hist(opts.f, opts.h, opts.b, opts.p)
+    plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour)
 

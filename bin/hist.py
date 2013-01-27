@@ -3,35 +3,8 @@ import math
 from collections import Counter
 import optparse
 import sys
+from utils.helpers import *
 
-
-bcolours = {
-    "white": '\033[97m',
-    "aqua": '\033[96m',
-    "pink": '\033[95m',
-    "blue": '\033[94m',
-    "yellow": '\033[93m',
-    "green": '\033[92m',
-    "red": '\033[91m',
-    "grey": '\033[90m',
-    "ENDC": '\033[0m'
-}
-
-def get_colour(colour):
-    return bcolours.get(colour, bcolours['white'])
-
-def printcolor(txt, sameline=False, color=get_colour("white")):
-    if sameline:
-        print color + txt + bcolours["ENDC"],
-    else:
-        print color + txt + bcolours["ENDC"]
-
-def drange(start, stop, step=1.0):
-    "generate between 2 numbers w/ optional step"
-    r = start
-    while r < stop:
-        yield r
-        r += step
 
 def calc_bins(n, min_val, max_val, h=None):
     "calculate number of bins for the histogram"
@@ -90,7 +63,7 @@ def plot_hist(f, height=20, bincount=None, pch="o", colour="white"):
         ylab = str(y)
         ylab += " "*(nlen - len(ylab)) + "|"
 
-        printcolor(ylab, True, colour)
+        print ylab,
 
         for i in range(len(hist)):
             if y < hist[i]:
@@ -100,16 +73,16 @@ def plot_hist(f, height=20, bincount=None, pch="o", colour="white"):
         print
     xs = hist.keys() * 2
 
-    printcolor(" "*(nlen+1) + "-"*len(xs), False, colour)
+    print " "*(nlen+1) + "-"*len(xs)
 
     for i in range(0, nlen):
         printcolor(" "*(nlen+1), True, colour)
         for x in range(0, len(hist)):
             num = str(bins[x])
             if x%2==0:
-                printcolor(" ", True, colour)
+                print " ", 
             elif i < len(num):
-                printcolor(num[i], True, colour)
+                print num[i],
         print
 
     summary = "Summary\n--------\nMax: %s\nMin: %s\nCount: %s" % (min_val, max_val, int(n))
@@ -126,7 +99,8 @@ if __name__=="__main__":
     parser.add_option('-s', '--height', help='height of the histogram (in lines)',
                       default=20, dest='h')
     parser.add_option('-p', '--pch', help='shape of each bar', default='o', dest='p')
-    parser.add_option('-c', '--colour', help='colour of the plot', default='white', dest='colour')
+    parser.add_option('-c', '--colour', help='colour of the plot (%s)' % ", ".join(bcolours.keys()),
+                      default='white', dest='colour')
 
     (opts, args) = parser.parse_args()
     

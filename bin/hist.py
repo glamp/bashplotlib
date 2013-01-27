@@ -22,7 +22,7 @@ def read_numbers(numbers):
         for n in open(numbers):
             yield float(n.strip())
 
-def plot_hist(f, height=20, bincount=None, pch="o", colour="white"):
+def plot_hist(f, height=20, bincount=None, pch="o", colour="white", title=""):
     "plot a histogram given a file of numbers"
     #first apss
     if pch is None:
@@ -58,7 +58,8 @@ def plot_hist(f, height=20, bincount=None, pch="o", colour="white"):
 
     nlen = max(len(str(min_y)), len(str(max_y))) + 1
 
-
+    print title.center(len(hist) + nlen + 1)
+    print
     for y in ys:
         ylab = str(y)
         ylab += " "*(nlen - len(ylab)) + "|"
@@ -94,6 +95,8 @@ if __name__=="__main__":
     parser = optparse.OptionParser()
     parser.add_option('-f', '--file', help='a file containing a column of numbers',
                       default=None, dest='f')
+    parser.add_option('-t', '--title', help='title for the chart',
+                      default="", dest='t')
     parser.add_option('-b', '--bins', help='number of bins in the histogram',
                       default=None, dest='b')
     parser.add_option('-s', '--height', help='height of the histogram (in lines)',
@@ -107,5 +110,5 @@ if __name__=="__main__":
     if opts.f is None:
         opts.f = args[0]
     
-    plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour)
+    plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour, opts.t)
 

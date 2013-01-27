@@ -17,9 +17,15 @@ def get_colour(colour):
 
 def printcolor(txt, sameline=False, color=get_colour("white")):
     if sameline:
-        print color + txt + bcolours["ENDC"],
+        if color=='\033[97m':
+            print txt,
+        else:
+            print color + txt + bcolours["ENDC"],
     else:
-        print color + txt + bcolours["ENDC"]
+        if color=='\033[97m':
+            print txt
+        else:
+            print color + txt + bcolours["ENDC"]
 
 def drange(start, stop, step=1.0):
     "generate between 2 numbers w/ optional step"

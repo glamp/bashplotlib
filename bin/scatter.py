@@ -2,6 +2,7 @@
 import csv
 import optparse
 from utils.helpers import *
+import sys
 
 
 def get_scale(series, is_y=False, steps=20):
@@ -19,7 +20,10 @@ def get_scale(series, is_y=False, steps=20):
 
 def plot_scatter(f, xs, ys, size, pch, colour, title):
     if f:
-        data = [tuple(map(float, line)) for line in csv.reader(open(f))]
+        if isinstance(f, str):
+            f = open(f)
+        
+        data = [tuple(map(float, line.strip().split(','))) for line in f]
         xs = [i[0] for i in data]
         ys = [i[1] for i in data]
     else:
@@ -72,6 +76,9 @@ if __name__=="__main__":
                       default='white', dest='colour')
 
     (opts, args) = parser.parse_args()
+
+    if opts.f is None and (opts.x is None or opts.y is None):
+        opts.f = sys.stdin.readlines()
 
     if opts.f or (opts.x and opts.y):
         plot_scatter(opts.f, opts.x, opts.y, opts.size, opts.pch, opts.colour, opts.t)

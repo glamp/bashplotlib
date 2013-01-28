@@ -117,8 +117,11 @@ if __name__=="__main__":
     (opts, args) = parser.parse_args()
     
     if opts.f is None:
-        opts.f = args[0]
-    
+        if len(args) > 0:
+            opts.f = args[0]
+        else:
+            opts.f = sys.stdin.readlines()
+
     if opts.f:
         plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour, opts.t)
     else:

@@ -1,4 +1,6 @@
 <h2>bashplotlib</h2>
+<h3>matplotlib's distant cousin</h3>
+
 <pre>python bin/scatter.py -f data/texas.txt --pch .</pre>
 	------------------------------------------
 	|             . . . . . .                 |

@@ -76,18 +76,18 @@ def plot_hist(f, height=20, bincount=None, pch="o", colour="white", title=""):
 
     print " "*(nlen+1) + "-"*len(xs)
 
-    for i in range(0, nlen):
-        printcolor(" "*(nlen+1), True, colour)
-        for x in range(0, len(hist)):
-            num = str(bins[x])
-            if x%2==0:
-                print " ", 
-            elif i < len(num):
-                print num[i],
-        print
-
-    summary = "Summary\n--------\nMax: %s\nMin: %s\nCount: %s" % (min_val, max_val, int(n))
-    print summary
+#    for i in range(0, nlen):
+#        printcolor(" "*(nlen+1), True, colour)
+#        for x in range(0, len(hist)):
+#            num = str(bins[x])
+#            if x%2==0:
+#                print " ", 
+#            elif i < len(num):
+#                print num[i],
+#        print
+#
+#    summary = "Summary\n--------\nMax: %s\nMin: %s\nCount: %s" % (min_val, max_val, int(n))
+#    print summary
 
 
 if __name__=="__main__":
@@ -110,5 +110,8 @@ if __name__=="__main__":
     if opts.f is None:
         opts.f = args[0]
     
-    plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour, opts.t)
+    if opts.f:
+        plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour, opts.t)
+    else:
+        print "nothing to plot!"
 

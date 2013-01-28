@@ -72,6 +72,9 @@ if __name__=="__main__":
                       default='white', dest='colour')
 
     (opts, args) = parser.parse_args()
-    
-    plot_scatter(opts.f, opts.x, opts.y, opts.size, opts.pch, opts.colour, opts.t)
+
+    if opts.f or (opts.x and opts.y):
+        plot_scatter(opts.f, opts.x, opts.y, opts.size, opts.pch, opts.colour, opts.t)
+    else:
+        print "nothing to plot!"
 

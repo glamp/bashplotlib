@@ -76,6 +76,15 @@ def plot_hist(f, height=20, bincount=None, pch="o", colour="white", title=""):
 
     print " "*(nlen+1) + "-"*len(xs)
 
+    print
+    print "-"*25
+    print "|" + "Summary".center(23) + "|"
+    print "-"*25
+    summary = "|" + ("observations: %d" % n).center(23) + "|\n"
+    summary += "|" + ("min value: %f" % min_val).center(23) + "|\n"
+    summary += "|" + ("max value: %f" % max_val).center(23) + "|\n"
+    summary += "-"*25
+    print summary
 #    for i in range(0, nlen):
 #        printcolor(" "*(nlen+1), True, colour)
 #        for x in range(0, len(hist)):
@@ -98,9 +107,9 @@ if __name__=="__main__":
     parser.add_option('-t', '--title', help='title for the chart',
                       default="", dest='t')
     parser.add_option('-b', '--bins', help='number of bins in the histogram',
-                      default=None, dest='b')
+                      type='int', default=None, dest='b')
     parser.add_option('-s', '--height', help='height of the histogram (in lines)',
-                      default=20, dest='h')
+                      type='int', default=20, dest='h')
     parser.add_option('-p', '--pch', help='shape of each bar', default='o', dest='p')
     parser.add_option('-c', '--colour', help='colour of the plot (%s)' % ", ".join(bcolours.keys()),
                       default='white', dest='colour')

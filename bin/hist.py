@@ -31,7 +31,7 @@ def plot_hist(f, height=20, bincount=None, pch="o", colour="white", title=""):
     colour = get_colour(colour)
 
     min_val, max_val = None, None
-    n = 0.
+    n, mean = 0., 0.
     for number in read_numbers(f):
         n += 1
 
@@ -39,6 +39,8 @@ def plot_hist(f, height=20, bincount=None, pch="o", colour="white", title=""):
             min_val = number
         if not max_val or number > max_val:
             max_val = number
+        mean += number
+    mean /= n
 
     bins = list(calc_bins(n, min_val, max_val, bincount))
     hist = Counter()
@@ -76,14 +78,18 @@ def plot_hist(f, height=20, bincount=None, pch="o", colour="white", title=""):
 
     print " "*(nlen+1) + "-"*len(xs)
 
+    
+    center = max(map(len, map(str, [n, min_val, mean, max_val])))
+    center += 15
     print
-    print "-"*25
-    print "|" + "Summary".center(23) + "|"
-    print "-"*25
-    summary = "|" + ("observations: %d" % n).center(23) + "|\n"
-    summary += "|" + ("min value: %f" % min_val).center(23) + "|\n"
-    summary += "|" + ("max value: %f" % max_val).center(23) + "|\n"
-    summary += "-"*25
+    print "-"*(2 + center)
+    print "|" + "Summary".center(center) + "|"
+    print "-"*(2 + center)
+    summary = "|" + ("observations: %d" % n).center(center) + "|\n"
+    summary += "|" + ("min value: %f" % min_val).center(center) + "|\n"
+    summary += "|" + ("mean : %f" % mean).center(center) + "|\n"
+    summary += "|" + ("max value: %f" % max_val).center(center) + "|\n"
+    summary += "-"*(2 + center)
     print summary
 #    for i in range(0, nlen):
 #        printcolor(" "*(nlen+1), True, colour)

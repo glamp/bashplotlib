@@ -17,7 +17,7 @@ def get_scale(series, is_y=False, steps=20):
         scaled_series.reverse()
     return scaled_series
 
-def plot_scatter(f, xs, ys, size, pch, colour):
+def plot_scatter(f, xs, ys, size, pch, colour, title):
     if f:
         data = [tuple(map(float, line)) for line in csv.reader(open(f))]
         xs = [i[0] for i in data]
@@ -25,11 +25,13 @@ def plot_scatter(f, xs, ys, size, pch, colour):
     else:
         xs = [float(row.strip()) for row in open(xs)]
         ys = [float(row.strip()) for row in open(ys)]
-    
+
     colour = get_colour(colour)
 
     plotted = set()
-
+    
+    print title.center(2*len(get_scale(xs, False, size))+2)
+    
     print "-"*(2*len(get_scale(xs, False, size))+2)
     for y in get_scale(ys, True, size):
         print "|",
@@ -56,6 +58,8 @@ if __name__=="__main__":
     parser = optparse.OptionParser()
     parser.add_option('-f', '--file', help='a csv w/ x and y coordinates',
                       default=None, dest='f')
+    parser.add_option('-t', '--title', help='title for the chart',
+                          default="", dest='t')
     parser.add_option('-x', help='x coordinates',
                       default=None, dest='x')
     parser.add_option('-y', help='y coordinates',
@@ -69,5 +73,5 @@ if __name__=="__main__":
 
     (opts, args) = parser.parse_args()
     
-    plot_scatter(opts.f, opts.x, opts.y, opts.size, opts.pch, opts.colour)
+    plot_scatter(opts.f, opts.x, opts.y, opts.size, opts.pch, opts.colour, opts.t)
 

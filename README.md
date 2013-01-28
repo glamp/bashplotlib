@@ -1,4 +1,4 @@
-<h2>Bashplot</h2>
+<h2>bashplotlib</h2>
 <pre>python bin/scatter.py -f data/texas.txt --pch .</pre>
 	------------------------------------------
 	|             . . . . . .                 |

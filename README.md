@@ -2,7 +2,7 @@
 <h3>matplotlib's distant cousin from the command line</h3>
 
 <pre>python bin/scatter.py -f data/texas.txt --pch .</pre>
-	------------------------------------------
+<p>	------------------------------------------
 	|             . . . . . .                 |
 	|             .         .                 |
 	|             .         .                 |
@@ -24,7 +24,7 @@
 	|                         .   . .         |
 	|                         . . . .         |
 	------------------------------------------
-
+</p>
 
 <pre>python bin/hist.py data/exp.txt</pre>
 	461 | o                

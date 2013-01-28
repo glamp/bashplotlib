@@ -1,5 +1,5 @@
-<h2>bashplotlib</h2>
-<h3>matplotlib's distant cousin from the command line</h3>
+#bashplotlib
+*matplotlib's distant cousin from the command line*
 
 <pre>python bin/scatter.py -f data/texas.txt --pch .</pre>
     ------------------------------------------

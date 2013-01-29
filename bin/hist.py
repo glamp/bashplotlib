@@ -9,7 +9,7 @@ from utils.helpers import *
 def calc_bins(n, min_val, max_val, h=None):
     "calculate number of bins for the histogram"
     if not h:
-        h = math.log(n + 1, 2) 
+        h = max(10, math.log(n + 1, 2)) 
     bin_width = (max_val - min_val) / h
     for b in drange(min_val, max_val, bin_width):
         yield b
@@ -22,7 +22,7 @@ def read_numbers(numbers):
         for n in open(numbers):
             yield float(n.strip())
 
-def plot_hist(f, height=20, bincount=None, pch="o", colour="white", title=""):
+def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title=""):
     "plot a histogram given a file of numbers"
     #first apss
     if pch is None:
@@ -43,7 +43,7 @@ def plot_hist(f, height=20, bincount=None, pch="o", colour="white", title=""):
     mean /= n
 
     bins = list(calc_bins(n, min_val, max_val, bincount))
-    hist = Counter()
+    hist = {i: 0 for i in range(len(bins))}
     for number in read_numbers(f):
         for i, b in enumerate(bins):
             if number < b:
@@ -51,19 +51,22 @@ def plot_hist(f, height=20, bincount=None, pch="o", colour="white", title=""):
              #   print "breaking"
                 break
 
-
-
     min_y, max_y = min(hist.values()), max(hist.values())
-
+  
     ys = list(drange(min_y, max_y, (max_y-min_y)/height))
     ys.reverse()
-
+    
     nlen = max(len(str(min_y)), len(str(max_y))) + 1
-
+    nlen = 20
     print title.center(len(hist) + nlen + 1)
     print
+    used_labs = set()
     for y in ys:
-        ylab = str(y)
+        ylab = str(int(y))
+        if ylab in used_labs:
+            ylab = ""
+        else:
+            used_labs.add(ylab)
         ylab += " "*(nlen - len(ylab)) + "|"
 
         print ylab,
@@ -115,7 +118,7 @@ if __name__=="__main__":
     parser.add_option('-b', '--bins', help='number of bins in the histogram',
                       type='int', default=None, dest='b')
     parser.add_option('-s', '--height', help='height of the histogram (in lines)',
-                      type='int', default=20, dest='h')
+                      type='int', default=20., dest='h')
     parser.add_option('-p', '--pch', help='shape of each bar', default='o', dest='p')
     parser.add_option('-c', '--colour', help='colour of the plot (%s)' % ", ".join(bcolours.keys()),
                       default='white', dest='colour')

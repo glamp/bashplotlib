@@ -1,10 +1,9 @@
 #!/usr/bin/python
 import math
-from collections import Counter
 import optparse
 import sys
 from utils.helpers import *
-
+from utils.commandhelp import hist
 
 def calc_bins(n, min_val, max_val, h=None):
     "calculate number of bins for the histogram"
@@ -47,7 +46,7 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title=""):
     for number in read_numbers(f):
         for i, b in enumerate(bins):
             if number < b:
-                hist[i-1] += 1
+                hist[i] += 1
              #   print "breaking"
                 break
 
@@ -57,7 +56,6 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title=""):
     ys.reverse()
     
     nlen = max(len(str(min_y)), len(str(max_y))) + 1
-    nlen = 20
     print title.center(len(hist) + nlen + 1)
     print
     used_labs = set()
@@ -67,7 +65,7 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title=""):
             ylab = ""
         else:
             used_labs.add(ylab)
-        ylab += " "*(nlen - len(ylab)) + "|"
+        ylab = " "*(nlen - len(ylab)) + ylab + "|"
 
         print ylab,
 
@@ -110,7 +108,8 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title=""):
 
 if __name__=="__main__":
 
-    parser = optparse.OptionParser()
+    parser = optparse.OptionParser(usage=hist['usage'])
+
     parser.add_option('-f', '--file', help='a file containing a column of numbers',
                       default=None, dest='f')
     parser.add_option('-t', '--title', help='title for the chart',
@@ -120,11 +119,12 @@ if __name__=="__main__":
     parser.add_option('-s', '--height', help='height of the histogram (in lines)',
                       type='int', default=20., dest='h')
     parser.add_option('-p', '--pch', help='shape of each bar', default='o', dest='p')
-    parser.add_option('-c', '--colour', help='colour of the plot (%s)' % ", ".join(bcolours.keys()),
+    parser.add_option('-c', '--colour', help='colour of the plot (%s)' % ", ".join([c for c in bcolours.keys() if c !=
+    'ENDC']),
                       default='white', dest='colour')
 
     (opts, args) = parser.parse_args()
-    
+   
     if opts.f is None:
         if len(args) > 0:
             opts.f = args[0]

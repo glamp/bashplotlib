@@ -3,6 +3,7 @@ import csv
 import optparse
 from utils.helpers import *
 import sys
+from helpers.commandhelp import scatter 
 
 
 def get_scale(series, is_y=False, steps=20):
@@ -59,7 +60,7 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
 
 if __name__=="__main__":
 
-    parser = optparse.OptionParser()
+    parser = optparse.OptionParser(usage=scatter['usage'])
     parser.add_option('-f', '--file', help='a csv w/ x and y coordinates',
                       default=None, dest='f')
     parser.add_option('-t', '--title', help='title for the chart',

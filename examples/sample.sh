@@ -16,3 +16,9 @@
 #using stdin
 curl https://dl.dropbox.com/u/49171662/example.txt | ../bin/hist.py
 
+#getting data from a webpage
+curl http://www.baseball-reference.com/ \
+| grep  -o -E "[$]([0-9]+)" | grep -o -E "[0-9]+" \
+| ../bin/hist.py -b 20 -t "Baseball Payrolls" --height 20 --pch "*"
+
+

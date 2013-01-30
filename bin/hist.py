@@ -21,7 +21,7 @@ def read_numbers(numbers):
         for n in open(numbers):
             yield float(n.strip())
 
-def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title=""):
+def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", xlab=None):
     "plot a histogram given a file of numbers"
     #first apss
     if pch is None:
@@ -47,7 +47,6 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title=""):
         for i, b in enumerate(bins):
             if number < b:
                 hist[i] += 1
-             #   print "breaking"
                 break
 
     min_y, max_y = min(hist.values()), max(hist.values())
@@ -79,7 +78,17 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title=""):
 
     print " "*(nlen+1) + "-"*len(xs)
 
-    
+
+    if xlab:
+        for i in range(0, nlen):
+            printcolor(" "*(nlen+1), True, colour)
+            for x in range(0, len(hist)):
+                num = str(bins[x])
+                if x%2==0:
+                    print " ",
+                elif i < len(num):
+                    print num[i],
+            print
     center = max(map(len, map(str, [n, min_val, mean, max_val])))
     center += 15
     print
@@ -92,18 +101,6 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title=""):
     summary += "|" + ("max value: %f" % max_val).center(center) + "|\n"
     summary += "-"*(2 + center)
     print summary
-#    for i in range(0, nlen):
-#        printcolor(" "*(nlen+1), True, colour)
-#        for x in range(0, len(hist)):
-#            num = str(bins[x])
-#            if x%2==0:
-#                print " ", 
-#            elif i < len(num):
-#                print num[i],
-#        print
-#
-#    summary = "Summary\n--------\nMax: %s\nMin: %s\nCount: %s" % (min_val, max_val, int(n))
-#    print summary
 
 
 if __name__=="__main__":
@@ -119,8 +116,8 @@ if __name__=="__main__":
     parser.add_option('-s', '--height', help='height of the histogram (in lines)',
                       type='int', default=20., dest='h')
     parser.add_option('-p', '--pch', help='shape of each bar', default='o', dest='p')
-    parser.add_option('-c', '--colour', help='colour of the plot (%s)' % ", ".join([c for c in bcolours.keys() if c !=
-    'ENDC']),
+    parser.add_option('-x', '--xlab', help='label bins on x-axis', default=None, action="store_true", dest='x')
+    parser.add_option('-c', '--colour', help='colour of the plot (%s)' % ", ".join([c for c in bcolours.keys() if c != 'ENDC']),
                       default='white', dest='colour')
 
     (opts, args) = parser.parse_args()
@@ -132,7 +129,7 @@ if __name__=="__main__":
             opts.f = sys.stdin.readlines()
 
     if opts.f:
-        plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour, opts.t)
+        plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour, opts.t, opts.x)
     else:
         print "nothing to plot!"
 

@@ -1,0 +1,11 @@
+setup.py
+bashplotlib/__init__.py
+bashplotlib/histogram.py
+bashplotlib/scatterplot.py
+bashplotlib.egg-info/PKG-INFO
+bashplotlib.egg-info/SOURCES.txt
+bashplotlib.egg-info/dependency_links.txt
+bashplotlib.egg-info/top_level.txt
+bashplotlib/utils/__init__.py
+bashplotlib/utils/commandhelp.py
+bashplotlib/utils/helpers.py

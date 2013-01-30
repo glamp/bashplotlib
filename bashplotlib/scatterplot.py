@@ -1,9 +1,9 @@
 #!/usr/bin/python
 import csv
 import optparse
-from utils.helpers import *
 import sys
-from helpers.commandhelp import scatter 
+from utils.helpers import *
+from utils.commandhelp import scatter 
 
 
 def get_scale(series, is_y=False, steps=20):

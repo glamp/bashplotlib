@@ -1,0 +1,37 @@
+#!/usr/bin/env python
+import csv
+import optparse
+import sys
+from bashplotlib.utils.helpers import *
+from bashplotlib.utils.commandhelp import scatter
+from bashplotlib.scatterplot import plot_scatter
+
+
+if __name__=='__main__':
+
+    parser = optparse.OptionParser(usage=scatter['usage'])
+    parser.add_option('-f', '--file', help='a csv w/ x and y coordinates',
+                      default=None, dest='f')
+    parser.add_option('-t', '--title', help='title for the chart',
+                          default='', dest='t')
+    parser.add_option('-x', help='x coordinates',
+                      default=None, dest='x')
+    parser.add_option('-y', help='y coordinates',
+                      default=None, dest='y')
+    parser.add_option('-s', '--size',help='y coordinates',
+                      default=20, dest='size', type='int')
+    parser.add_option('-p', '--pch',help='shape of point',
+                      default='x', dest='pch')
+    parser.add_option('-c', '--colour', help='colour of the plot (%s)' % ', '.join(bcolours.keys()),
+                      default='white', dest='colour')
+
+    (opts, args) = parser.parse_args()
+
+    if opts.f is None and (opts.x is None or opts.y is None):
+        opts.f = sys.stdin.readlines()
+
+    if opts.f or (opts.x and opts.y):
+        plot_scatter(opts.f, opts.x, opts.y, opts.size, opts.pch, opts.colour, opts.t)
+    else:
+        print "nothing to plot!"
+

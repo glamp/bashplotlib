@@ -3,9 +3,9 @@ from setuptools import find_packages
 
 setup(
     name="bashplotlib",
-    version="0.1.0",
+    version="0.2.0",
     packages=find_packages(),
-    license="MIT",
+    license=open("LICENSE").read(),
     long_description=open("README.md").read(),
 )
 

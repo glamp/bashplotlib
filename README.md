@@ -4,6 +4,7 @@
 #installation
 <pre>pip install bashplotlib</pre>
 
+#examples
 <pre>python bin/scatter.py -f data/texas.txt --pch .</pre>
     ------------------------------------------
 	|             . . . . . .                 |

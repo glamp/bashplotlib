@@ -29,6 +29,8 @@ def printcolor(txt, sameline=False, color=get_colour("white")):
 
 def drange(start, stop, step=1.0):
     "generate between 2 numbers w/ optional step"
+    if step==0:
+        step = 0.01
     r = start
     while r < stop:
         yield r

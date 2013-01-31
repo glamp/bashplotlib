@@ -1,6 +1,9 @@
 #bashplotlib
 *matplotlib's distant cousin from the command line*
 
+#installation
+<pre>pip install bashplotlib</pre>
+
 <pre>python bin/scatter.py -f data/texas.txt --pch .</pre>
     ------------------------------------------
 	|             . . . . . .                 |

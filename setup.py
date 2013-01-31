@@ -4,8 +4,12 @@ from setuptools import find_packages
 setup(
     name="bashplotlib",
     version="0.2.0",
+    author="Greg Lamp",
+    author_email="lamp.greg@gmail.com",
+    url="https://github.com/glamp/bashplotlib",
+    license=open("LICENSE.txt").read(),
     packages=find_packages(),
-    license=open("LICENSE").read(),
-    long_description=open("README.md").read(),
+    description="plotting from the command line",
+    long_description=open("README.txt").read(),
 )
 

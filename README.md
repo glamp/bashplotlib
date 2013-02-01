@@ -3,7 +3,7 @@
 
 <p>Why I wrote it. What you can use it for.</p>
 
-#installation
+##installation
 <h5>install with pip</h5>
 <pre>
 	$ pip install bashplotlib
@@ -18,127 +18,34 @@
 <p>This will install the bashplotlib python package and will also add <code>hist</code> and <code>scatter</code> 
 to your python scripts folder. This folder should be on your path (add it if it's not).</p>
 
-#examples
+##features
+<p>put some features in here</p>
+
+##usage
+<h5>command line</h5>
+<p>this is how you use it from the command line</p>
+<h5>in python</h5>
+<p>this is how you use it in python</p>
+
+##examples
 <pre>scatter -f data/texas.txt --pch .</pre>
-    ------------------------------------------
-	|             . . . . . .                 |
-	|             .         .                 |
-	|             .         .                 |
-	|             .         . .               |
-	|             .           . . . . . . .   |
-	|             .                 . . . . . |
-	|             .                           |
-	|             .                           |
-	| . .   .   . .                           |
-	|   . .                                   |
-	|     . .                                 |
-	|       . .                               |
-	|       . .     . . .                 . . |
-	|         . . .     . .               . . |
-	|           . .       .           . . .   |
-	|                     . .       . .       |
-	|                       .     . .         |
-	|                       . .   . .         |
-	|                         .   . .         |
-	|                         . . . .         |
-	------------------------------------------
+insert picture of output here
 
 
 <pre>hist data/exp.txt</pre>
-	461 | o                
-	438 | o                
-	415 | o                
-	392 | o                
-	369 | o                
-	346 | o                
-	323 | o                
-	300 | o                
-	277 | o                
-	254 | o o              
-	231 | o o              
-	208 | o o              
-	185 | o o              
-	162 | o o              
-	139 | o o              
-	116 | o o o            
-	93  | o o o            
-	70  | o o o o          
-	47  | o o o o          
-	24  | o o o o o        
-	1   | o o o o o o o o  
-	     ------------------
+insert picture of output here
 
 
 <pre>scatter -x data/x_test.txt -y data/y_test.txt</pre>
-	--------------------------------------------
-	|       x           |                       |
-	|                   |                       |
-	|                   |         x             |
-	|                   |                       |
-	|                   |                       |
-	| x               x |                       |
-	|                   |                       |
-	| - - - - - - - - - o - - - - - - - - - - - |
-	|                   |                       |
-	|                   |                       |
-	|                   |                       |
-	|           x       |                       |
-	|                   |       x               |
-	|                   |                       |
-	|                   |                       |
-	|                   |                       |
-	|                   |                       |
-	|                   |                       |
-	|                   |                       |
-	|                   |                 x     |
-	|                   |                     x |
-	--------------------------------------------
+insert picture of output here
 <pre>scatter -f data/lower48.txt -s 40 --pch .</pre>
-	----------------------------------------------------------------------------------
-	|     . .   . . . . . . . . . . . . . . . . .                                     |
-	|   . .         .               .         . . . . .   .                           |
-	| . . .       . .               .         .     . . . .                           |
-	|   . .       . .               .         .       .                             . |
-	|   .         . . .             .         .     . .                           .   |
-	|   . . . . . .   .             . . . . . .     . . . .                       .   |
-	|   . . . .   .   .             .         .     .     .                     . .   |
-	|   .         .   . . . . . . . .         .     .     .                 . . . . . |
-	|   .         .     . .         .         .     . .   .               .   . . . . |
-	|   .         .       .         .         . . . . .   .             . .   . . . . |
-	|   .                 .         . . . . . .       .   .           . . .   . . .   |
-	|   .                 .         .         .       . . .           .       .   .   |
-	|   . . . . . . . . . .         .         .       .   . . . . . . . . . . . . .   |
-	|   .     .       .   . . . . . . .       . .     .   .   . . . .       . . . .   |
-	|   .                   .         .       . . . . .   .   .     .       . .       |
-	|   .     .       .     .         . . . . . .     .   .   .     . . . . . .       |
-	|   .     .       .     .         .         .     .   .   .   . . . . . .         |
-	|   .     .       .     .         .         .     .   .   . . .   . . . .         |
-	|     . . . .     .     .         .         .     . . . . .   . . . . . .         |
-	|     .     .     .     .         .         .       . . .     . .     .           |
-	|     . .     .   . . . . . . . . . . . . . .       . . .   . . .     .           |
-	|     . .       . .               . . .     . . . . . . . . . . . . . .           |
-	|       .       . .     .         .   .     .     . .       . .     . .           |
-	|       .       . .     .         .   .     .     . . . . . . . .   . .           |
-	|       . .       .     .         .   .     .     .   .   . . . . . . .           |
-	|         . .     .     .         .   . . . .     .   .   .   .   . .             |
-	|           . . . .     .         .         . . . .   .   .   .   .               |
-	|             . . .     .         .           .   .   .   .   . . .               |
-	|                 .         . . . .           .   .   .   .     .                 |
-	|                     . . . .                 . . .   .   .   . .                 |
-	|                             .               . . . . . . . . . .                 |
-	|                             .               .   . . . . . . .                   |
-	|                             . . . .       . . . . .     . .   .                 |
-	|                               . . .     . .     . .       . . .                 |
-	|                                   .     . .                 . .                 |
-	|                                     . . .                   . .                 |
-	|                                     . .                     . .                 |
-	|                                     . .                     . .                 |
-	|                                       . .                   . .                 |
-	|                                                               .                 |
-	----------------------------------------------------------------------------------
+insert picture of output here
 
-#todos
-	- colors for individual points
-	- line charts
-	- trendlines
+##todo
+<ul>
+	<li>sideways numbers for x-axis of histograms</li>
+	<li>colors for individual points</li>
+	<li>line charts</li>
+	<li>trendlines</li>
+</ul>
 

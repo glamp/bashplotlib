@@ -28,17 +28,17 @@ to your python scripts folder. This folder should be on your path (add it if it'
 <p>this is how you use it in python</p>
 
 ##examples
-<pre>scatter -f data/texas.txt --pch .</pre>
+<pre>$ scatter -f data/texas.txt --pch .</pre>
 insert picture of output here
 
 
-<pre>hist data/exp.txt</pre>
+<pre>$ hist data/exp.txt</pre>
 insert picture of output here
 
 
-<pre>scatter -x data/x_test.txt -y data/y_test.txt</pre>
+<pre>$ scatter -x data/x_test.txt -y data/y_test.txt</pre>
 insert picture of output here
-<pre>scatter -f data/lower48.txt -s 40 --pch .</pre>
+<pre>$ scatter -f data/lower48.txt -s 40 --pch .</pre>
 insert picture of output here
 
 ##todo

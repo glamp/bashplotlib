@@ -2,7 +2,15 @@
 *matplotlib's distant cousin from the command line*
 
 #installation
-<pre>pip install bashplotlib</pre>
+<pre>
+    #install with pip
+    pip install bashplotlib
+</pre>
+<pre>
+    #install from source
+    git clone git@github.com:glamp/bashplotlib.git
+    python setup.py install
+</pre>
 
 #examples
 <pre>python bin/scatter.py -f data/texas.txt --pch .</pre>

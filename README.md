@@ -9,11 +9,12 @@
 <h5>install from source</h5>
 <pre>
     git clone git@github.com:glamp/bashplotlib.git
+    cd bashplotlib
     python setup.py install
 </pre>
 
 #examples
-<pre>python bin/scatter.py -f data/texas.txt --pch .</pre>
+<pre>scatter -f data/texas.txt --pch .</pre>
     ------------------------------------------
 	|             . . . . . .                 |
 	|             .         .                 |
@@ -38,7 +39,7 @@
 	------------------------------------------
 
 
-<pre>python bin/hist.py data/exp.txt</pre>
+<pre>hist data/exp.txt</pre>
 	461 | o                
 	438 | o                
 	415 | o                
@@ -63,7 +64,7 @@
 	     ------------------
 
 
-<pre>python bin/scatter.py -x data/x_test.txt -y data/y_test.txt</pre>
+<pre>scatter -x data/x_test.txt -y data/y_test.txt</pre>
 	--------------------------------------------
 	|       x           |                       |
 	|                   |                       |
@@ -87,7 +88,7 @@
 	|                   |                 x     |
 	|                   |                     x |
 	--------------------------------------------
-<pre>bin/scatter.py -f data/lower48.txt -s 40 --pch .</pre>
+<pre>scatter -f data/lower48.txt -s 40 --pch .</pre>
 	----------------------------------------------------------------------------------
 	|     . .   . . . . . . . . . . . . . . . . .                                     |
 	|   . .         .               .         . . . . .   .                           |

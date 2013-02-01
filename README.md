@@ -20,6 +20,13 @@ to your python scripts folder. This folder should be on your path (add it if it'
 
 ##features
 <p>put some features in here</p>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+</ul>
 
 ##usage
 <h5>command line</h5>

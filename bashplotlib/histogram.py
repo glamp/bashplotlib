@@ -14,16 +14,44 @@ def calc_bins(n, min_val, max_val, h=None):
         yield b
 
 def read_numbers(numbers):
+    "read the input data in the most optimal way"
     if isinstance(numbers, list):
         for n in numbers:
+            n = str(n)
             yield float(n.strip())
     else:
         for n in open(numbers):
             yield float(n.strip())
 
+def run_demo():
+    "demo the product"
+    #plotting a histogram
+    print "plotting a basic histogram"
+    print "plot_hist('./data/exp.txt')"
+    print "hist -f ./data/exp.txt"
+    print "cat ./data/exp.txt | hist"
+    plot_hist('./data/exp.txt')
+    print "*"*80
+    #with colors
+    print "histogram with colors"
+    print "plot_hist('./data/exp.txt', colour='blue')"
+    print "hist -f ./data/exp.txt -c blue"
+    plot_hist('./data/exp.txt', colour='blue')
+    print "*"*80
+    #changing the shape of the point
+    print "changing the shape of the bars"
+    print "plot_hist('./data/exp.txt', pch='.')"
+    print "hist -f ./data/exp.txt -p ."
+    plot_hist('./data/exp.txt', pch='.')
+    print "*"*80
+    #chagning the size of the plot
+    print "chagning the size of the plot"
+    print "plot_hist('./data/exp.txt', height=35.0, bincount=40)"
+    print "hist -f ./data/exp.txt -s 35.0 -b 40"
+    plot_hist('./data/exp.txt', height=35.0, bincount=40)
+
 def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", xlab=None):
     "plot a histogram given a file of numbers"
-    #first apss
     if pch is None:
         pch = "o"
     
@@ -55,7 +83,9 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", 
     ys.reverse()
     
     nlen = max(len(str(min_y)), len(str(max_y))) + 1
-    print title.center(len(hist) + nlen + 1)
+    
+    if title:
+        print box_text(title, len(hist)*2, nlen)
     print
     used_labs = set()
     for y in ys:
@@ -119,16 +149,19 @@ if __name__=="__main__":
     parser.add_option('-x', '--xlab', help='label bins on x-axis', default=None, action="store_true", dest='x')
     parser.add_option('-c', '--colour', help='colour of the plot (%s)' % ", ".join([c for c in bcolours.keys() if c != 'ENDC']),
                       default='white', dest='colour')
+    parser.add_option('-d', '--demo', help='run demos', action='store_true', dest='demo')
 
     (opts, args) = parser.parse_args()
    
     if opts.f is None:
         if len(args) > 0:
             opts.f = args[0]
-        else:
+        elif opts.demo is False:
             opts.f = sys.stdin.readlines()
 
-    if opts.f:
+    if opts.demo:
+        run_demo()
+    elif opts.f:
         plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour, opts.t, opts.x)
     else:
         print "nothing to plot!"

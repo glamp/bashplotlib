@@ -28,14 +28,15 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
         xs = [i[0] for i in data]
         ys = [i[1] for i in data]
     else:
-        xs = [float(row.strip()) for row in open(xs)]
-        ys = [float(row.strip()) for row in open(ys)]
+        xs = [float(str(row).strip()) for row in open(xs)]
+        ys = [float(str(row).strip()) for row in open(ys)]
 
     colour = get_colour(colour)
 
     plotted = set()
     
-    print title.center(2*len(get_scale(xs, False, size))+2)
+    if title:
+        print box_text(title, 2*len(get_scale(xs, False, size))+1)
     
     print "-"*(2*len(get_scale(xs, False, size))+2)
     for y in get_scale(ys, True, size):

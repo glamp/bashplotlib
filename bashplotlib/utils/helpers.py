@@ -36,11 +36,10 @@ def drange(start, stop, step=1.0):
         yield r
         r += step
 
-def box_text(text, width):
-    box = "="*(width+4) + "\n"
-    box += "||" + text.center(width) + "||" + "\n"
-    box += "="*(width+4)
+def box_text(text, width, offset=0):
+    box = " "*offset + "-"*(width+2) + "\n"
+    box += " "*offset + "|"+ text.center(width) + "|" + "\n"
+    box += " "*offset + "-"*(width+2)
     return box
 
 
-print box_text("HELLO", 20)

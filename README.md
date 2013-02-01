@@ -4,13 +4,13 @@
 #installation
 <h5>install with pip</h5>
 <pre>
-    pip install bashplotlib
+    $ pip install bashplotlib
 </pre>
 <h5>install from source</h5>
 <pre>
-    git clone git@github.com:glamp/bashplotlib.git
-    cd bashplotlib
-    python setup.py install
+    $ git clone git@github.com:glamp/bashplotlib.git
+    $ cd bashplotlib
+    $ python setup.py install
 </pre>
 
 #examples

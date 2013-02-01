@@ -2,12 +2,12 @@
 *matplotlib's distant cousin from the command line*
 
 #installation
+<h5>install with pip</h5>
 <pre>
-    #install with pip
     pip install bashplotlib
 </pre>
+<h5>install from source</h5>
 <pre>
-    #install from source
     git clone git@github.com:glamp/bashplotlib.git
     python setup.py install
 </pre>

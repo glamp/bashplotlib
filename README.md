@@ -1,6 +1,8 @@
 #bashplotlib
 *plotting in the terminal*
 
+<p>Why I wrote it. What you can use it for.</p>
+
 #installation
 <h5>install with pip</h5>
 <pre>
@@ -12,6 +14,9 @@
 	$ cd bashplotlib
 	$ python setup.py install
 </pre>
+
+<p>This will install the bashplotlib python package and will also add <code>hist</code> and <code>scatter</code> 
+to your python scripts folder. This folder should be on your path (add it if it's not).</p>
 
 #examples
 <pre>scatter -f data/texas.txt --pch .</pre>
@@ -131,3 +136,9 @@
 	|                                       . .                   . .                 |
 	|                                                               .                 |
 	----------------------------------------------------------------------------------
+
+#todos
+	- colors for individual points
+	- line charts
+	- trendlines
+

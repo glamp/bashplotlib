@@ -19,13 +19,9 @@
 to your python scripts folder. This folder should be on your path (add it if it's not).</p>
 
 ##features
-<p>put some features in here</p>
 <ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
+    <li>quick plotting from the command line</li>
+    <li>pipe data into plots with stdin</li>
 </ul>
 
 ##usage

@@ -1,5 +1,5 @@
 #bashplotlib
-*matplotlib's distant cousin from the command line*
+*plotting in the terminal*
 
 #installation
 <h5>install with pip</h5>

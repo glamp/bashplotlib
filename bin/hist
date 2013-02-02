@@ -23,7 +23,7 @@ if __name__=="__main__":
     parser.add_option('-c', '--colour', help='colour of the plot (%s)' % ", ".join([c for c in bcolours.keys() if c != 'ENDC']),
                       default='white', dest='colour')
     parser.add_option('-d', '--demo', help='run demos', action='store_true', dest='demo')
-    parser.add_option('-n', '--nosummary', help='run demos', action='store_true', dest='nosummary')
+    parser.add_option('-n', '--nosummary', help='run demos', action='store_false', dest='nosummary')
 
     (opts, args) = parser.parse_args()
 

@@ -34,15 +34,14 @@ to your python scripts folder. This folder should be on your path (add it if it'
 <pre>$ scatter -f data/texas.txt --pch .</pre>
 <img src="examples/texas.png">
 
-
 <pre>$ hist data/exp.txt</pre>
-insert picture of output here
-
+<img src="examples/histogram.png">
 
 <pre>$ scatter -x data/x_test.txt -y data/y_test.txt</pre>
-insert picture of output here
+<img src="examples/scatter.png">
+
 <pre>$ scatter -f data/lower48.txt -s 40 --pch .</pre>
-insert picture of output here
+<img src="examples/usa.png">
 
 ##todo
 <ul>

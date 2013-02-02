@@ -32,7 +32,7 @@ to your python scripts folder. This folder should be on your path (add it if it'
 
 ##examples
 <pre>$ scatter -f data/texas.txt --pch .</pre>
-insert picture of output here
+<img src="examples/texas.png">
 
 
 <pre>$ hist data/exp.txt</pre>

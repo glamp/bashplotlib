@@ -26,11 +26,11 @@ if __name__=="__main__":
     parser.add_option('-n', '--nosummary', help='run demos', action='store_false', dest='nosummary')
 
     (opts, args) = parser.parse_args()
-
+    
     if opts.f is None:
         if len(args) > 0:
             opts.f = args[0]
-        elif opts.demo is False:
+        elif opts.demo is None:
             opts.f = sys.stdin.readlines()
 
     if opts.demo:

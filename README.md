@@ -1,7 +1,7 @@
 #bashplotlib
 *plotting in the terminal*
 
-<p>bashplotlib is an .</p>
+<p>bashplotlib is a python package and command line tool for making basic plots in the terminal. I use it to help keep tabs on logfiles and processes running on EC2 servers.</p>
 
 ##installation
 <h5>install with pip</h5>

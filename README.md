@@ -33,7 +33,10 @@ to your python scripts folder. This folder should be on your path (add it if it'
 <p><code>scatter</code> takes x and y coordinates as input form either a comma delimited file using -f or from 2 different files using -x and -y.</p>
 <img src="examples/scatterhelp.png">
 <h5>in python</h5>
-<p>this is how you use it in python</p>
+<pre>from bashplotlib.scatterplot import plot_scatter</pre>
+<img src="examples/scatterplothelp.png">
+<pre>from bashplotlib.histogram import plot_hist</pre>
+<img src="examples/histogramhelp.png">
 
 ##examples
 <pre>$ scatter -f data/texas.txt --pch .</pre>

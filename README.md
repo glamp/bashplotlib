@@ -18,7 +18,7 @@
 	$ python setup.py install
 </pre>
 
-<p>This will install the bashplotlib python package and will also add <code>hist</code> and <code>scatter</code> 
+<p>Either method will install the bashplotlib python package and will also add <code>hist</code> and <code>scatter</code> 
 to your python scripts folder. This folder should be on your path (add it if it's not).</p>
 
 ##features

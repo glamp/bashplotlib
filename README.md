@@ -1,7 +1,7 @@
 #bashplotlib
 *plotting in the terminal*
 
-<p>Why I wrote it. What you can use it for.</p>
+<p>bashplotlib is an .</p>
 
 ##installation
 <h5>install with pip</h5>

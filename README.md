@@ -1,5 +1,7 @@
 #bashplotlib
 *plotting in the terminal*
+<br><br>
+<img src="examples/basichist.png">
 
 ##what is it?
 <p>bashplotlib is a python package and command line tool for making basic plots in the terminal. It's a quick way to visualize data when you don't have a GUI. It's written in pure python and can quickly be installed anywhere using pip.</p>
@@ -16,7 +18,7 @@
 	$ python setup.py install
 </pre>
 
-<p>This will install the bashplotlib python package and will also add <code>hist</code> and <code>scatter</code> 
+<p>Either method will install the bashplotlib python package and will also add <code>hist</code> and <code>scatter</code> 
 to your python scripts folder. This folder should be on your path (add it if it's not).</p>
 
 ##features
@@ -50,7 +52,7 @@ to your python scripts folder. This folder should be on your path (add it if it'
 <pre>$ scatter -x data/x_test.txt -y data/y_test.txt</pre>
 <img src="examples/scatter.png">
 
-<pre>$ scatter -f data/lower48.txt -s 40 --pch .</pre>
+<pre>$ cat data/lower48.txt | scatter -s 40 --pch .</pre>
 <img src="examples/usa.png">
 
 ##todo

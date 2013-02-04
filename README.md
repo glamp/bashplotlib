@@ -1,5 +1,7 @@
 #bashplotlib
 *plotting in the terminal*
+<br><br>
+<img src="examples/basichist.png">
 
 ##what is it?
 <p>bashplotlib is a python package and command line tool for making basic plots in the terminal. It's a quick way to visualize data when you don't have a GUI. It's written in pure python and can quickly be installed anywhere using pip.</p>

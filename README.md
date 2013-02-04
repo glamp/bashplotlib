@@ -28,7 +28,10 @@ to your python scripts folder. This folder should be on your path (add it if it'
 
 ##usage
 <h5>command line</h5>
-<p>this is how you use it from the command line</p>
+<p><code>hist</code> takes input from either stdin or specified using the -f parameter. Input should be a single column of numbers.</p>
+<img src="examples/histhelp.png">
+<p><code>scatter</code> takes x and y coordinates as input form either a comma delimited file using -f or from 2 different files using -x and -y.</p>
+<img src="examples/scatterhelp.png">
 <h5>in python</h5>
 <p>this is how you use it in python</p>
 

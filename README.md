@@ -1,7 +1,7 @@
 #bashplotlib
 *plotting in the terminal*
 <br><br>
-<img src="examples/basichist.png">
+<img src="examples/img/basichist.png">
 
 ##what is it?
 <p>bashplotlib is a python package and command line tool for making basic plots in the terminal. It's a quick way to visualize data when you don't have a GUI. It's written in pure python and can quickly be installed anywhere using pip.</p>
@@ -31,29 +31,29 @@ to your python scripts folder. This folder should be on your path (add it if it'
 ##usage
 <h5>command line</h5>
 <p><code>hist</code> takes input from either stdin or specified using the -f parameter. Input should be a single column of numbers.</p>
-<img src="examples/histhelp.png">
+<img src="examples/img/histhelp.png">
 <p><code>scatter</code> takes x and y coordinates as input form either a comma delimited file using -f or from 2 different files using -x and -y.</p>
-<img src="examples/scatterhelp.png">
+<img src="examples/img/scatterhelp.png">
 
 <h5>in python</h5>
 <p>If you want to use bashplotlib from python, just import histogram and scatterplot.</p>
 <pre>from bashplotlib.scatterplot import plot_scatter</pre>
-<img src="examples/scatterplothelp.png">
+<img src="examples/img/scatterplothelp.png">
 <pre>from bashplotlib.histogram import plot_hist</pre>
-<img src="examples/histogramhelp.png">
+<img src="examples/img/histogramhelp.png">
 
 ##examples
 <pre>$ scatter -f data/texas.txt --pch .</pre>
-<img src="examples/texas.png">
+<img src="examples/img/texas.png">
 
 <pre>$ hist data/exp.txt</pre>
-<img src="examples/histogram.png">
+<img src="examples/img/histogram.png">
 
 <pre>$ scatter -x data/x_test.txt -y data/y_test.txt</pre>
-<img src="examples/scatter.png">
+<img src="examples/img/scatter.png">
 
 <pre>$ cat data/lower48.txt | scatter -s 40 --pch .</pre>
-<img src="examples/usa.png">
+<img src="examples/img/usa.png">
 
 ##todo
 <ul>

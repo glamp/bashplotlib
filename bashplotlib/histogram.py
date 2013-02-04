@@ -51,7 +51,18 @@ def run_demo():
     plot_hist('./data/exp.txt', height=35.0, bincount=40)
 
 def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", xlab=None, nosummary=True):
-    "plot a histogram given a file of numbers"
+    """make a histogram
+
+        Keyword arguments:
+        height -- the height of the histogram in # of lines
+        bincount -- number of bins in the histogram
+        pch -- shape of the bars in the plot
+        colour -- colour of the bars in the terminal
+        title -- title at the top of the plot
+        xlab -- boolen value for whether or not to display x-axis labels
+        nosummary -- boolean value for whether or not to display a summary
+    """
+    
     if pch is None:
         pch = "o"
     

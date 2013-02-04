@@ -20,6 +20,18 @@ def get_scale(series, is_y=False, steps=20):
     return scaled_series
 
 def plot_scatter(f, xs, ys, size, pch, colour, title):
+    """Form a complex number.
+    
+        Arguments:
+        f -- comma delimited file w/ x,y coordinates
+        xs -- if f not specified this is a file w/ x coordinates
+        ys -- if f not specified this is a filew / y coordinates
+        size -- size of the plot
+        pch -- shape of the points (any character)
+        colour -- colour of the points
+        title -- title of the plot 
+    """
+    
     if f:
         if isinstance(f, str):
             f = open(f)

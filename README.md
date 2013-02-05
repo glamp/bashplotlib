@@ -43,16 +43,16 @@ to your python scripts folder. This folder should be on your path (add it if it'
 <img src="examples/img/histogramhelp.png">
 
 ##examples
-<pre>$ scatter -f data/texas.txt --pch .</pre>
+<pre>$ scatter --file data/texas.txt --pch .</pre>
 <img src="examples/img/texas.png">
 
-<pre>$ hist data/exp.txt</pre>
+<pre>$ hist --file data/exp.txt</pre>
 <img src="examples/img/histogram.png">
 
 <pre>$ scatter -x data/x_test.txt -y data/y_test.txt</pre>
 <img src="examples/img/scatter.png">
 
-<pre>$ cat data/lower48.txt | scatter -s 40 --pch .</pre>
+<pre>$ cat data/lower48.txt | scatter --size 40 --pch . --colour blue</pre>
 <img src="examples/img/usa.png">
 
 ##todo

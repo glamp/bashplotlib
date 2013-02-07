@@ -30,9 +30,7 @@ if __name__=="__main__":
         if len(args) > 0:
             opts.f = args[0]
 
-    if opts.demo:
-        run_demo()
-    elif opts.f:
+    if opts.f:
         plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour, opts.t, opts.x, opts.nosummary)
     else:
         print "nothing to plot!"

@@ -29,6 +29,8 @@ if __name__=="__main__":
     if opts.f is None:
         if len(args) > 0:
             opts.f = args[0]
+        else:
+            opts.f = sys.stdin.readlines()
 
     if opts.f:
         plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour, opts.t, opts.x, opts.nosummary)

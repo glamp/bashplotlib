@@ -3,7 +3,7 @@ from setuptools import find_packages
 
 setup(
     name="bashplotlib",
-    version="0.3.8",
+    version="0.3.9",
     author="Greg Lamp",
     author_email="lamp.greg@gmail.com",
     url="https://github.com/glamp/bashplotlib",

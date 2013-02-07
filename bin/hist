@@ -22,7 +22,6 @@ if __name__=="__main__":
     parser.add_option('-x', '--xlab', help='label bins on x-axis', default=None, action="store_true", dest='x')
     parser.add_option('-c', '--colour', help='colour of the plot (%s)' % ", ".join([c for c in bcolours.keys() if c != 'ENDC']),
                       default='white', dest='colour')
-    parser.add_option('-d', '--demo', help='run demos', action='store_true', dest='demo')
     parser.add_option('-n', '--nosummary', help='hide summary', action='store_false', dest='nosummary')
 
     (opts, args) = parser.parse_args()
@@ -30,8 +29,6 @@ if __name__=="__main__":
     if opts.f is None:
         if len(args) > 0:
             opts.f = args[0]
-        elif opts.demo is None:
-            opts.f = sys.stdin.readlines()
 
     if opts.demo:
         run_demo()

@@ -52,9 +52,6 @@ to your python scripts folder. This folder should be on your path (add it if it'
 <pre>$ scatter -x data/x_test.txt -y data/y_test.txt</pre>
 <img src="examples/img/scatter.png">
 
-<pre>$ cat data/lower48.txt | scatter --size 40 --pch . --colour blue</pre>
-<img src="examples/img/usa.png">
-
 ##todo
 <ul>
 	<li>sideways numbers for x-axis of histograms</li>

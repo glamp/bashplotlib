@@ -81,7 +81,9 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", 
     mean /= n
 
     bins = list(calc_bins(n, min_val, max_val, bincount))
-    hist = {i: 0 for i in range(len(bins))}
+    hist = {}
+    for i in range(len(bings)):
+        hist[i] = 0
     for number in read_numbers(f):
         for i, b in enumerate(bins):
             if number < b:

@@ -10,7 +10,7 @@ setup(
     license=open("LICENSE.txt").read(),
     packages=find_packages(),
     description="plotting in the terminal",
-    long_description=open("README.txt").read(),
+    long_description=open("README.md").read(),
     scripts=['bin/hist', 'bin/scatter'],
 )
 

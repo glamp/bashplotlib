@@ -50,7 +50,7 @@ def run_demo():
     print "hist -f ./data/exp.txt -s 35.0 -b 40"
     plot_hist('./data/exp.txt', height=35.0, bincount=40)
 
-def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", xlab=None, nosummary=True):
+def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", xlab=None, showSummary=False):
     """make a histogram
 
         Keyword arguments:
@@ -60,7 +60,7 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", 
         colour -- colour of the bars in the terminal
         title -- title at the top of the plot
         xlab -- boolen value for whether or not to display x-axis labels
-        nosummary -- boolean value for whether or not to display a summary
+        showSummary -- boolean value for whether or not to display a summary
     """
     
     if pch is None:
@@ -135,7 +135,7 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", 
     center = max(map(len, map(str, [n, min_val, mean, max_val])))
     center += 15
     
-    if nosummary is not True:
+    if showSummary:
         print
         print "-"*(2 + center)
         print "|" + "Summary".center(center) + "|"
@@ -165,7 +165,7 @@ if __name__=="__main__":
     parser.add_option('-c', '--colour', help='colour of the plot (%s)' % ", ".join([c for c in bcolours.keys() if c != 'ENDC']),
                       default='white', dest='colour')
     parser.add_option('-d', '--demo', help='run demos', action='store_true', dest='demo')
-    parser.add_option('-n', '--nosummary', help='run demos', action='store_true', dest='nosummary')
+    parser.add_option('-n', '--nosummary', help='hide summary', action='store_false', dest='showSummary', default=True)
 
     (opts, args) = parser.parse_args()
 
@@ -178,7 +178,7 @@ if __name__=="__main__":
     if opts.demo:
         run_demo()
     elif opts.f:
-        plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour, opts.t, opts.x, opts.nosummary)
+        plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour, opts.t, opts.x, opts.showSummary)
     else:
         print "nothing to plot!"
 

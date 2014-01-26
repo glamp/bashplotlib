@@ -37,19 +37,29 @@ to your python scripts folder. This folder should be on your path (add it if it'
 
 ### in python
 If you want to use bashplotlib from python, just import histogram and scatterplot.
-`from bashplotlib.scatterplot import plot_scatter`
+```
+from bashplotlib.scatterplot import plot_scatter
+```
 <img src="examples/img/scatterplothelp.png">
-`from bashplotlib.histogram import plot_hist`
+```
+from bashplotlib.histogram import plot_hist
+```
 <img src="examples/img/histogramhelp.png">
 
 ##examples
-`$ scatter --file data/texas.txt --pch .`
+```
+$ scatter --file data/texas.txt --pch .
+```
 <img src="examples/img/texas.png">
 
-`$ hist --file data/exp.txt`
+```
+$ hist --file data/exp.txt
+```
 <img src="examples/img/histogram.png">
 
-`$ scatter -x data/x_test.txt -y data/y_test.txt`
+```
+$ scatter -x data/x_test.txt -y data/y_test.txt
+```
 <img src="examples/img/scatter.png">
 
 ##todo

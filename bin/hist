@@ -22,7 +22,7 @@ if __name__=="__main__":
     parser.add_option('-x', '--xlab', help='label bins on x-axis', default=None, action="store_true", dest='x')
     parser.add_option('-c', '--colour', help='colour of the plot (%s)' % ", ".join([c for c in bcolours.keys() if c != 'ENDC']),
                       default='white', dest='colour')
-    parser.add_option('-n', '--nosummary', help='hide summary', action='store_false', dest='nosummary')
+    parser.add_option('-n', '--nosummary', help='hide summary', action='store_false', dest='showSummary', default=True)
 
     (opts, args) = parser.parse_args()
     
@@ -33,7 +33,7 @@ if __name__=="__main__":
             opts.f = sys.stdin.readlines()
 
     if opts.f:
-        plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour, opts.t, opts.x, opts.nosummary)
+        plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour, opts.t, opts.x, opts.showSummary)
     else:
         print "nothing to plot!"
 

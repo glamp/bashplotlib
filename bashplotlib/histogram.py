@@ -5,12 +5,15 @@ import sys
 from utils.helpers import *
 from utils.commandhelp import hist
 
-def calc_bins(n, min_val, max_val, h=None):
+def calc_bins(n, min_val, max_val, h=None, binwidth=None):
     "calculate number of bins for the histogram"
     if not h:
         h = max(10, math.log(n + 1, 2))
-    bin_width = (max_val - min_val) / h
-    for b in drange(min_val, max_val, bin_width):
+    if binwidth == 0:
+        binwidth = 0.1
+    if binwidth is None:
+        binwidth = (max_val - min_val) / h
+    for b in drange(min_val, max_val, step=binwidth, include_stop=True):
         yield b
 
 def read_numbers(numbers):
@@ -50,12 +53,13 @@ def run_demo():
     print "hist -f ./data/exp.txt -s 35.0 -b 40"
     plot_hist('./data/exp.txt', height=35.0, bincount=40)
 
-def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", xlab=None, showSummary=False):
+def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="white", title="", xlab=None, showSummary=False):
     """make a histogram
 
         Keyword arguments:
         height -- the height of the histogram in # of lines
         bincount -- number of bins in the histogram
+        binwidth -- width of bins in the histogram
         pch -- shape of the bars in the plot
         colour -- colour of the bars in the terminal
         title -- title at the top of the plot
@@ -80,7 +84,7 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", 
         mean += number
     mean /= n
 
-    bins = list(calc_bins(n, min_val, max_val, bincount))
+    bins = list(calc_bins(n, min_val, max_val, bincount, binwidth))
     hist = {}
     for i in range(len(bins)):
         hist[i] = 0
@@ -161,6 +165,8 @@ if __name__=="__main__":
                       default="", dest='t')
     parser.add_option('-b', '--bins', help='number of bins in the histogram',
                       type='int', default=None, dest='b')
+    parser.add_option('-w', '--binwidth', help='width of bins in the histogram',
+                      type='float', default=None, dest='binwidth')
     parser.add_option('-s', '--height', help='height of the histogram (in lines)',
                       type='int', default=20., dest='h')
     parser.add_option('-p', '--pch', help='shape of each bar', default='o', dest='p')
@@ -181,7 +187,7 @@ if __name__=="__main__":
     if opts.demo:
         run_demo()
     elif opts.f:
-        plot_hist(opts.f, opts.h, opts.b, opts.p, opts.colour, opts.t, opts.x, opts.showSummary)
+        plot_hist(opts.f, opts.h, opts.b, opts.binwidth, opts.p, opts.colour, opts.t, opts.x, opts.showSummary)
     else:
         print "nothing to plot!"
 

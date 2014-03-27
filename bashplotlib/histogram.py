@@ -8,7 +8,7 @@ from utils.commandhelp import hist
 def calc_bins(n, min_val, max_val, h=None):
     "calculate number of bins for the histogram"
     if not h:
-        h = max(10, math.log(n + 1, 2)) 
+        h = max(10, math.log(n + 1, 2))
     bin_width = (max_val - min_val) / h
     for b in drange(min_val, max_val, bin_width):
         yield b
@@ -44,8 +44,8 @@ def run_demo():
     print "hist -f ./data/exp.txt -p ."
     plot_hist('./data/exp.txt', pch='.')
     print "*"*80
-    #chagning the size of the plot
-    print "chagning the size of the plot"
+    #changing the size of the plot
+    print "changing the size of the plot"
     print "plot_hist('./data/exp.txt', height=35.0, bincount=40)"
     print "hist -f ./data/exp.txt -s 35.0 -b 40"
     plot_hist('./data/exp.txt', height=35.0, bincount=40)
@@ -62,10 +62,10 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", 
         xlab -- boolen value for whether or not to display x-axis labels
         showSummary -- boolean value for whether or not to display a summary
     """
-    
+
     if pch is None:
         pch = "o"
-    
+
     colour = get_colour(colour)
 
     min_val, max_val = None, None
@@ -73,9 +73,9 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", 
     for number in read_numbers(f):
         n += 1
 
-        if not min_val or number < min_val:
+        if (min_val is None) or (number < min_val):
             min_val = number
-        if not max_val or number > max_val:
+        if (max_val is None) or (number > max_val):
             max_val = number
         mean += number
     mean /= n
@@ -91,14 +91,14 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", 
                 break
 
     min_y, max_y = min(hist.values()), max(hist.values())
-  
+
     ys = list(drange(min_y, max_y, (max_y-min_y)/height))
     ys.reverse()
-    
+
     nlen = max(len(str(min_y)), len(str(max_y))) + 1
-    
+
     if title:
-        print box_text(title, len(hist)*2, nlen)
+        print box_text(title, max(len(hist)*2, len(title)), nlen)
     print
     used_labs = set()
     for y in ys:
@@ -123,7 +123,8 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", 
 
 
     if xlab:
-        for i in range(0, nlen):
+        xlen = len(str(float((max_y)/height) + max_y))
+        for i in range(0, xlen):
             printcolor(" "*(nlen+1), True, colour)
             for x in range(0, len(hist)):
                 num = str(bins[x])
@@ -131,10 +132,12 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", 
                     print " ",
                 elif i < len(num):
                     print num[i],
+                else:
+                    print " ",
             print
     center = max(map(len, map(str, [n, min_val, mean, max_val])))
     center += 15
-    
+
     if showSummary:
         print
         print "-"*(2 + center)

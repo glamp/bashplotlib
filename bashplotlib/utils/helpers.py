@@ -27,14 +27,19 @@ def printcolor(txt, sameline=False, color=get_colour("white")):
         else:
             print color + txt + bcolours["ENDC"]
 
-def drange(start, stop, step=1.0):
-    "generate between 2 numbers w/ optional step"
+def drange(start, stop, step=1.0, include_stop=False):
+    "generate between 2 numbers w/ optional step, optionally include upper bound"
     if step==0:
         step = 0.01
     r = start
-    while r < stop:
-        yield r
-        r += step
+    if include_stop:
+        while r <= stop:
+            yield r
+            r += step
+    else:
+        while r < stop:
+            yield r
+            r += step
 
 def box_text(text, width, offset=0):
     box = " "*offset + "-"*(width+2) + "\n"

@@ -86,13 +86,15 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", 
         hist[i] = 0
     for number in read_numbers(f):
         for i, b in enumerate(bins):
-            if number < b:
+            if number <= b:
                 hist[i] += 1
                 break
+        if number == max_val and max_val > bins[len(bins) - 1]:
+            hist[len(hist) - 1] += 1
 
     min_y, max_y = min(hist.values()), max(hist.values())
 
-    ys = list(drange(min_y, max_y, (max_y-min_y)/height))
+    ys = list(drange(max(min_y, 1), max_y + 1, (max_y-min_y)/height))
     ys.reverse()
 
     nlen = max(len(str(min_y)), len(str(max_y))) + 1
@@ -112,7 +114,7 @@ def plot_hist(f, height=20.0, bincount=None, pch="o", colour="white", title="", 
         print ylab,
 
         for i in range(len(hist)):
-            if y < hist[i]:
+            if int(y) <= hist[i]:
                 printcolor(pch, True, colour)
             else:
                 printcolor(" ", True, colour)

@@ -36,15 +36,16 @@ def drange(start, stop, step=1.0, include_stop=False):
         while r <= stop:
             yield r
             r += step
+            r = round(r, 10)
     else:
         while r < stop:
             yield r
             r += step
+            r = round(r, 10)
 
 def box_text(text, width, offset=0):
     box = " "*offset + "-"*(width+2) + "\n"
     box += " "*offset + "|"+ text.center(width) + "|" + "\n"
     box += " "*offset + "-"*(width+2)
     return box
-
 

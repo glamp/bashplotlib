@@ -53,7 +53,7 @@ def run_demo():
     print "hist -f ./data/exp.txt -s 35.0 -b 40"
     plot_hist('./data/exp.txt', height=35.0, bincount=40)
 
-def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="white", title="", xlab=None, showSummary=False):
+def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="white", title="", xlab=None, showSummary=False, regular=False):
     """make a histogram
 
         Keyword arguments:
@@ -65,6 +65,7 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="whi
         title -- title at the top of the plot
         xlab -- boolen value for whether or not to display x-axis labels
         showSummary -- boolean value for whether or not to display a summary
+        regular -- boolean value for whether or not to start y-labels at 0
     """
 
     if pch is None:
@@ -98,7 +99,17 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="whi
 
     min_y, max_y = min(hist.values()), max(hist.values())
 
-    ys = list(drange(max(min_y, 1), max_y + 1, (max_y-min_y)/height))
+    start = max(min_y, 1)
+    stop = max_y + 1
+    if regular:
+        start = 1
+
+    if height is None:
+        height = stop - start
+        if height > 20:
+            height = 20
+
+    ys = list(drange(start, stop, float(stop - start)/height))
     ys.reverse()
 
     nlen = max(len(str(min_y)), len(str(max_y))) + 1
@@ -170,13 +181,14 @@ if __name__=="__main__":
     parser.add_option('-w', '--binwidth', help='width of bins in the histogram',
                       type='float', default=None, dest='binwidth')
     parser.add_option('-s', '--height', help='height of the histogram (in lines)',
-                      type='int', default=20., dest='h')
+                      type='int', default=None, dest='h')
     parser.add_option('-p', '--pch', help='shape of each bar', default='o', dest='p')
     parser.add_option('-x', '--xlab', help='label bins on x-axis', default=None, action="store_true", dest='x')
     parser.add_option('-c', '--colour', help='colour of the plot (%s)' % ", ".join([c for c in bcolours.keys() if c != 'ENDC']),
                       default='white', dest='colour')
     parser.add_option('-d', '--demo', help='run demos', action='store_true', dest='demo')
     parser.add_option('-n', '--nosummary', help='hide summary', action='store_false', dest='showSummary', default=True)
+    parser.add_option('-r', '--regular', help='use regular y-scale (0 - maximum y value), instead of truncated y-scale (minimum y-value - maximum y-value)', default=False, action="store_true", dest='regular')
 
     (opts, args) = parser.parse_args()
 
@@ -189,7 +201,7 @@ if __name__=="__main__":
     if opts.demo:
         run_demo()
     elif opts.f:
-        plot_hist(opts.f, opts.h, opts.b, opts.binwidth, opts.p, opts.colour, opts.t, opts.x, opts.showSummary)
+        plot_hist(opts.f, opts.h, opts.b, opts.binwidth, opts.p, opts.colour, opts.t, opts.x, opts.showSummary, opts.regular)
     else:
         print "nothing to plot!"
 

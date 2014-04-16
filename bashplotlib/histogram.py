@@ -14,7 +14,10 @@ def calc_bins(n, min_val, max_val, h=None, binwidth=None):
     if binwidth is None:
         binwidth = (max_val - min_val) / h
     for b in drange(min_val, max_val, step=binwidth, include_stop=True):
-        yield b
+        if b.is_integer():
+            yield int(b)
+        else:
+            yield b
 
 def read_numbers(numbers):
     "read the input data in the most optimal way"

@@ -1,25 +1,31 @@
-echo plotting coordinates
+#!/usr/bin/env bash
 
-scatter --file ./data/texas.txt
+dir=$(dirname "$0")
 
-echo with x and y coords
-scatter -x ./data/x_test.txt -y ./data/y_test.txt
+if [ ! -d "${dir}/data" ]; then 
+    echo 'downloading data'
+    "${dir}/downloaddata.sh"
+fi
 
-echo plotting a histogram
-hist --file ./data/exp.txt
+echo 'plotting coordinates'
+scatter --file "${dir}/data/texas.txt"
 
-echo with colors
-hist --file ./data/exp.txt --colour blue
+echo 'with x and y coords'
+scatter -x "${dir}/data/x_test.txt" -y "${dir}/data/y_test.txt"
 
-echo changing the shape of the point
-hist --file ./data/exp.txt --pch .
+echo 'plotting a histogram'
+hist --file "${dir}/data/exp.txt"
 
-echo using stdin
-curl https://dl.dropbox.com/u/49171662/example.txt | hist
+echo 'with colors'
+hist --file "${dir}/data/exp.txt" --colour blue
 
-echo getting data from a webpage
-curl http://www.baseball-reference.com/ \
-| grep  -o -E "[$]([0-9]+)" | grep -o -E "[0-9]+" \
-| hist -b 20 -t "Baseball Payrolls" --height 20 --pch "*"
+echo 'changing the shape of the point'
+hist --file "${dir}/data/exp.txt" --pch .
 
+#echo 'using stdin'
+#curl -sL https://dl.dropbox.com/u/49171662/example.txt | hist
 
+#echo 'getting data from a webpage'
+#curl -s 'http://www.baseball-reference.com' | 
+#grep  -o -E '[$][0-9]+' | grep -o -E '[0-9]+' |
+#hist -b 20 -t 'Baseball Payrolls' --height 20 --pch '*'

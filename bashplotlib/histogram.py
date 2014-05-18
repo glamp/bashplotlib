@@ -1,6 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+
 import math
 import optparse
+import os
+from os.path import dirname
 import sys
 from utils.helpers import *
 from utils.commandhelp import hist
@@ -29,32 +32,47 @@ def read_numbers(numbers):
         for n in open(numbers):
             yield float(n.strip())
 
+
 def run_demo():
-    "demo the product"
+    """
+    Run a demonstration
+    """
+    module_dir = dirname(dirname(os.path.realpath(__file__)))
+    demo_file = os.path.join(module_dir, 'examples/data/exp.txt')
+
+    if not os.path.isfile(demo_file):
+        sys.stderr.write("demo input file not found!\n")
+        sys.stderr.write("run the downloaddata.sh script in the example first\n")
+        sys.exit(1)
+
     #plotting a histogram
     print "plotting a basic histogram"
-    print "plot_hist('./data/exp.txt')"
-    print "hist -f ./data/exp.txt"
-    print "cat ./data/exp.txt | hist"
-    plot_hist('./data/exp.txt')
-    print "*"*80
+    print "plot_hist('%s')" % demo_file
+    print "hist -f %s" % demo_file
+    print "cat %s | hist" % demo_file
+    plot_hist(demo_file)
+    print "*" * 80
+
     #with colors
     print "histogram with colors"
-    print "plot_hist('./data/exp.txt', colour='blue')"
-    print "hist -f ./data/exp.txt -c blue"
-    plot_hist('./data/exp.txt', colour='blue')
-    print "*"*80
+    print "plot_hist('%s', colour='blue')" % demo_file
+    print "hist -f %s -c blue" % demo_file
+    plot_hist(demo_file, colour='blue')
+    print "*" * 80
+
     #changing the shape of the point
     print "changing the shape of the bars"
-    print "plot_hist('./data/exp.txt', pch='.')"
-    print "hist -f ./data/exp.txt -p ."
-    plot_hist('./data/exp.txt', pch='.')
-    print "*"*80
+    print "plot_hist('%s', pch='.')" % demo_file
+    print "hist -f %s -p ." % demo_file
+    plot_hist(demo_file, pch='.')
+    print "*" * 80
+
     #changing the size of the plot
     print "changing the size of the plot"
-    print "plot_hist('./data/exp.txt', height=35.0, bincount=40)"
-    print "hist -f ./data/exp.txt -s 35.0 -b 40"
-    plot_hist('./data/exp.txt', height=35.0, bincount=40)
+    print "plot_hist('%s', height=35.0, bincount=40)" % demo_file
+    print "hist -f %s -s 35.0 -b 40" % demo_file
+    plot_hist(demo_file, height=35.0, bincount=40)
+
 
 def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="white", title="", xlab=None, showSummary=False, regular=False):
     """make a histogram
@@ -171,7 +189,7 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="whi
         print summary
 
 
-if __name__=="__main__":
+def main():
 
     parser = optparse.OptionParser(usage=hist['usage'])
 
@@ -208,3 +226,6 @@ if __name__=="__main__":
     else:
         print "nothing to plot!"
 
+
+if __name__=="__main__":
+    main()

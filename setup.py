@@ -1,5 +1,6 @@
-from distutils.core import setup
-from setuptools import find_packages
+#!/usr/bin/env python
+
+from setuptools import find_packages, setup
 
 setup(
     name="bashplotlib",
@@ -11,6 +12,11 @@ setup(
     packages=find_packages(),
     description="plotting in the terminal",
     long_description=open("README.md").read(),
-    scripts=['bin/hist', 'bin/scatter'],
+    entry_points = {
+        'console_scripts': [
+            'hist=bashplotlib.histogram:main',
+            'scatter=bashplotlib.scatterplot:main',
+        ]
+    }
 )
 

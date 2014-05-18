@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+
 import math
 import optparse
 import sys
@@ -171,7 +172,7 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="whi
         print summary
 
 
-if __name__=="__main__":
+def main():
 
     parser = optparse.OptionParser(usage=hist['usage'])
 
@@ -208,3 +209,6 @@ if __name__=="__main__":
     else:
         print "nothing to plot!"
 
+
+if __name__=="__main__":
+    main()

@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+
 import csv
 import optparse
 import sys
@@ -71,7 +72,7 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
     print "-"*(2*len(get_scale(xs, False, size))+2)
 
 
-if __name__=="__main__":
+def main():
 
     parser = optparse.OptionParser(usage=scatter['usage'])
     parser.add_option('-f', '--file', help='a csv w/ x and y coordinates',
@@ -99,3 +100,6 @@ if __name__=="__main__":
     else:
         print "nothing to plot!"
 
+
+if __name__=="__main__":
+    main()

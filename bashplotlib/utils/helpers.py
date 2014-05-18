@@ -8,17 +8,20 @@ Various helpful function for bashplotlib
 import sys
 
 bcolours = {
-    "white":  '\033[97m',
-    "aqua":   '\033[96m',
-    "pink":   '\033[95m',
-    "blue":   '\033[94m',
-    "yellow": '\033[93m',
-    "green":  '\033[92m',
-    "red":    '\033[91m',
-    "grey":   '\033[90m',
-    "black":  '\033[30m',
-    "ENDC":   '\033[39m',
+    "white":   '\033[97m',
+    "aqua":    '\033[96m',
+    "pink":    '\033[95m',
+    "blue":    '\033[94m',
+    "yellow":  '\033[93m',
+    "green":   '\033[92m',
+    "red":     '\033[91m',
+    "grey":    '\033[90m',
+    "black":   '\033[30m',
+    "default": '\033[39m',
+    "ENDC":    '\033[39m',
 }
+
+colour_help = ', '.join([colour for colour in bcolours if colour != "ENDC"])
 
 
 def get_colour(colour):

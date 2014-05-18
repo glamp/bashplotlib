@@ -1,10 +1,15 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Plotting terminal based scatterplots
+"""
 
 import csv
-import optparse
 import sys
-from utils.helpers import *
-from utils.commandhelp import scatter 
+import optparse
+from .utils.helpers import *
+from .utils.commandhelp import scatter 
 
 
 def get_scale(series, is_y=False, steps=20):
@@ -20,10 +25,12 @@ def get_scale(series, is_y=False, steps=20):
         scaled_series.reverse()
     return scaled_series
 
+
 def plot_scatter(f, xs, ys, size, pch, colour, title):
-    """Form a complex number.
+    """
+    Form a complex number.
     
-        Arguments:
+    Arguments:
         f -- comma delimited file w/ x,y coordinates
         xs -- if f not specified this is a file w/ x coordinates
         ys -- if f not specified this is a filew / y coordinates
@@ -44,14 +51,12 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
         xs = [float(str(row).strip()) for row in open(xs)]
         ys = [float(str(row).strip()) for row in open(ys)]
 
-    colour = get_colour(colour)
-
     plotted = set()
     
     if title:
         print box_text(title, 2*len(get_scale(xs, False, size))+1)
     
-    print "-"*(2*len(get_scale(xs, False, size))+2)
+    print "-" * (2*len(get_scale(xs, False, size))+2)
     for y in get_scale(ys, True, size):
         print "|",
         for x in get_scale(xs, False, size):
@@ -67,7 +72,7 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
                 point = "|"
             elif y==0:
                 point = "-"
-            printcolor(point, True, colour)
+            printcolour(point, True, colour)
         print "|"
     print "-"*(2*len(get_scale(xs, False, size))+2)
 
@@ -75,22 +80,16 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
 def main():
 
     parser = optparse.OptionParser(usage=scatter['usage'])
-    parser.add_option('-f', '--file', help='a csv w/ x and y coordinates',
-                      default=None, dest='f')
-    parser.add_option('-t', '--title', help='title for the chart',
-                          default="", dest='t')
-    parser.add_option('-x', help='x coordinates',
-                      default=None, dest='x')
-    parser.add_option('-y', help='y coordinates',
-                      default=None, dest='y')
-    parser.add_option('-s', '--size',help='y coordinates',
-                      default=20, dest='size', type='int')
-    parser.add_option('-p', '--pch',help='shape of point',
-                      default="x", dest='pch') 
-    parser.add_option('-c', '--colour', help='colour of the plot (%s)' % ", ".join(bcolours.keys()),
-                      default='white', dest='colour')
 
-    (opts, args) = parser.parse_args()
+    parser.add_option('-f', '--file', help='a csv w/ x and y coordinates', default=None, dest='f')
+    parser.add_option('-t', '--title', help='title for the chart', default="", dest='t')
+    parser.add_option('-x', help='x coordinates', default=None, dest='x')
+    parser.add_option('-y', help='y coordinates', default=None, dest='y')
+    parser.add_option('-s', '--size',help='y coordinates', default=20, dest='size', type='int')
+    parser.add_option('-p', '--pch',help='shape of point', default="x", dest='pch') 
+    parser.add_option('-c', '--colour', help='colour of the plot (%s)' % colour_help, default='default', dest='colour')
+
+    opts, args = parser.parse_args()
 
     if opts.f is None and (opts.x is None or opts.y is None):
         opts.f = sys.stdin.readlines()

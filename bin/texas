@@ -1,0 +1,7 @@
+#!/usr/bin/env python
+import os
+
+_ROOT = os.path.abspath(os.path.dirname(__file__))
+
+texas = os.path.join(_ROOT, "../bashplotlib", "data", "texas.txt")
+print open(texas).read().strip()

@@ -222,7 +222,7 @@ def main():
     if opts.f is None:
         if len(args) > 0:
             opts.f = args[0]
-        elif opts.demo is False:
+        elif opts.demo is None or opts.demo is False:
             opts.f = sys.stdin.readlines()
 
     if opts.demo:

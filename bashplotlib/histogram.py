@@ -165,7 +165,7 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
             else:
                 printcolour(" ", True, colour)
         print
-    xs = hist.keys() * 2
+    xs = hist.keys()
 
     print " " * (nlen+1) + "-" * len(xs)
 
@@ -175,8 +175,8 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
             printcolour(" " * (nlen+1), True, colour)
             for x in range(0, len(hist)):
                 num = str(bins[x])
-                if x % 2 == 0:
-                    print " ",
+                if x % 2 != 0:
+                    pass
                 elif i < len(num):
                     print num[i],
                 else:

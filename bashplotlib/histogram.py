@@ -35,7 +35,7 @@ def read_numbers(numbers):
     """
     Read the input data in the most optimal way
     """
-    if isinstance(numbers, list):
+    if isiterable(numbers):
         for number in numbers:
             yield float(str(number).strip())
     else:

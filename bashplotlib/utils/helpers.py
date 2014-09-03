@@ -7,6 +7,8 @@ Various helpful function for bashplotlib
 
 import sys
 
+isiterable = lambda x: hasattr(x, '__iter__') or hasattr(x, '__getitem__')
+
 bcolours = {
     "white":   '\033[97m',
     "aqua":    '\033[96m',

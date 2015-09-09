@@ -6,6 +6,8 @@ Plotting terminal based histograms
 """
 
 from __future__ import print_function
+from __future__ import division
+
 import os
 import sys
 import math
@@ -147,7 +149,7 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
 
     if title:
         print(box_text(title, max(len(hist) * 2, len(title)), nlen))
-    print
+    print()
 
     used_labs = set()
     for y in ys:
@@ -165,7 +167,7 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
                 printcolour(pch, True, colour)
             else:
                 printcolour(" ", True, colour)
-        print()
+        print('')
     xs = hist.keys()
 
     print(" " * (nlen + 1) + "-" * len(xs))
@@ -182,7 +184,7 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
                     print(num[i], end=' ')
                 else:
                     print(" ", end=' ')
-            print
+            print('')
 
     center = max(map(len, map(str, [n, min_val, mean, max_val])))
     center += 15

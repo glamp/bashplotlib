@@ -105,6 +105,9 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
     if pch is None:
         pch = "o"
 
+    if isinstance(f, str):
+        f = open(f).readlines()
+
     min_val, max_val = None, None
     n, mean = 0.0, 0.0
 

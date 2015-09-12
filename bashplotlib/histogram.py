@@ -1,9 +1,8 @@
 #!/usr/bin/python
 import math
 import optparse
-import sys
+import sys, os
 from utils.helpers import *
-from utils.commandhelp import hist
 
 def calc_bins(n, min_val, max_val, h=None):
     "calculate number of bins for the histogram"
@@ -14,14 +13,30 @@ def calc_bins(n, min_val, max_val, h=None):
         yield b
 
 def read_numbers(numbers):
-    "read the input data in the most optimal way"
+    "read the input data in the most optimal way. skip NA values."
+    if numbers is None:
+        return
     if isinstance(numbers, list):
         for n in numbers:
-            n = str(n)
-            yield float(n.strip())
+            if n:
+                n = str(n)
+                try:
+                    yield float(n.strip())
+                except Exception, err:
+                    # sys.stderr.write(str(n))
+                    # sys.stderr.write(err.message)
+                    # sys.stderr.flush()
+                    continue
     else:
         for n in open(numbers):
-            yield float(n.strip())
+            if n:
+                try:
+                    yield float(n.strip())
+                except Exception, err:
+                    # sys.stderr.write(str(n))
+                    # sys.stderr.write(err.message)
+                    # sys.stderr.flush()
+                    continue
 
 def run_demo():
     "demo the product"

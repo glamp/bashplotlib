@@ -3,15 +3,10 @@
 import sys, os
 from bashplotlib.utils.commandhelp import HIST_DOCSTRING as __doc__
 from bashplotlib.histogram import plot_hist
-
-try:
-    import docopt
-    from bashplotlib.utils.commandhelp import parse_hist_args_with_docopt as parse_args
-except ImportError:
-    from bashplotlib.utils.commandhelp import parse_hist_args_with_optparse as parse_args
+from bashplotlib.utils.commandhelp import parse_args
 
 def main():
-    plot_params = parse_args()
+    plot_params = parse_args(__doc__)
     plot_hist(**plot_params)
 
 if __name__ == "__main__":

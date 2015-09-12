@@ -4,13 +4,14 @@
 """
 import sys
 import os
+from docopt import docopt
 from bashplotlib.utils.helpers import *
 from select import select
 
-HIST_DOCSTRING = """hist
+HIST_DOCSTRING = """hist - construct a histogram for a continuous variable from your terminal
 
 Usage:
-    hist [[FILE -f FILENAME] -t TITLE -b BINS -s SIZE -p MARKERSHAPE -x XLAB -c COLOUR] [-n] [-h]
+    hist [[FILE | -f FILENAME] -t TITLE -b BINS -s SIZE -p MARKERSHAPE -x XLAB -c COLOUR] [-n] [-h]
 
 Arguments:
     FILE                              A file containing a column of numbers [default: stdin]
@@ -23,7 +24,7 @@ Arguments:
     -c --colour COLOUR                Colour of the plot (Pink, blue, green, red, white, aqua, grey, yellow) [default: white]
 
 Options:
-    -n --nosummary        Hide summary
+    -n --nosummary                    Hide summary
     -h --help                         Show this screen
 
 Examples:
@@ -34,16 +35,13 @@ Examples:
 
 """
 
-HIST_OPTPARSE_ARGUMENTS = [
-    {"short":"-f","long":"--file","description":"a file containing a column of numbers","default": None, "dest": "FILE"},
-    {"short":"-t","long":"--title","description":"title for the chart","default": "", "dest": "TITLE"},
-    {"short":"-b","long":"--bins","description":"number of bins in the histogram","default": None, "dest": "BINS"},
-    {"short":"-s","long":"--height","description":"height of the histogram (in lines)","default": 20.0, "dest": "SIZE"},
-    {"short":"-p","long":"--pch","description":"shape of each bar","default":"o", "dest": "MARKERSHAPE"},
-    {"short":"-x","long":"--xlab","description":"label bins on x-axis","default": None, "dest": "XLAB"},
-    {"short":"-c","long":"--colour","description":"colour of the plot (pink, blue, green, red, white, aqua, grey, yellow)","default":"white", "dest": "COLOUR"},
-    {"short":"-n","long":"--nosummary","description":"hide summary","default": True, "dest": "SHOWSUMMARY"}
-]
+# SCATTER_DOCSTRING = """scatter - construct a scatter plot from your terminal
+
+# Usage:
+#     scatter [[FILE | -f FILENAME] -t TITLE -b BINS -s SIZE -p MARKERSHAPE -x XLAB -c COLOUR] [-n] [-h]
+
+
+# """
 
 scatter = {
     "usage": """scatterplot is a command for making xy plots. it accepts a series of x values and a series of y values in the 
@@ -65,9 +63,10 @@ def _read_stdin_or_timeout():
     else:
         return None
 
-def parse_hist_args_with_docopt():
-    from docopt import docopt
-    args = docopt(HIST_DOCSTRING)
+def parse_args(command_docstring):
+    """takes __doc__ for given cmd. Returns parsed args using docopt.
+    """
+    args = docopt(command_docstring)
     for k, v in args.iteritems():
         if v == 'None':
             args[k] = None
@@ -76,7 +75,7 @@ def parse_hist_args_with_docopt():
     if args['--file'] == 'stdin':
         args['--file'] = _read_stdin_or_timeout()
         if args['--file'] is None:
-            print HIST_DOCSTRING
+            print command_docstring
             sys.exit(1)
     plot_params = {
         'bincount': args['--bins'],
@@ -87,28 +86,5 @@ def parse_hist_args_with_docopt():
         'showSummary': (not args['--nosummary']),
         'title': args['--title'],
         'xlab': args['--xlab']
-    }
-    return plot_params
-
-def parse_hist_args_with_optparse():
-    import optparse
-    parser = optparse.OptionParser(usage=HIST_DOCSTRING)
-    for opt in HIST_OPTPARSE_ARGUMENTS:
-        parser.add_option(opt['short'], opt['long'], help=opt['description'],default=opt['default'], dest=opt['dest'])
-    (opts, args) = parser.parse_args()
-    if opts.FILE is None:
-        if len(args) > 0:
-            opts.FILE = args[0]
-        else:
-            opts.FILE = _read_stdin_or_timeout()
-    plot_params = {
-        'bincount': opts.BINS,
-        'colour': opts.COLOUR,
-        'f': opts.FILE,
-        'height': float(opts.SIZE),
-        'pch': opts.MARKERSHAPE,
-        'showSummary': opts.SHOWSUMMARY,
-        'title': opts.TITLE,
-        'xlab': opts.XLAB
     }
     return plot_params

@@ -1,4 +1,8 @@
-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
+"""utils/helpers.py
+"""
+import os, sys
 
 bcolours = {
     "white": '\033[97m',
@@ -42,4 +46,12 @@ def box_text(text, width, offset=0):
     box += " "*offset + "-"*(width+2)
     return box
 
-
+def try_cast_str_to_number(number_str, verbose=False):
+    "takes txt and tries to coerce it to float"
+    try:
+        return float(number_str.strip())
+    except Exception, err:
+        if verbose:
+            sys.stderr.write(err.message)
+            sys.stderr.flush()
+        return None

@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
-import sys, os
-from bashplotlib.utils.commandhelp import HIST_DOCSTRING as __doc__
-from bashplotlib.histogram import plot_hist
-from bashplotlib.utils.commandhelp import parse_args
+import os, sys
+from bashplotlib.cli.hist import __doc__
+from bashplotlib.cli.hist import parse_args
+from bashplotlib.core.histogram import plot_hist
+
 
 def main():
-    plot_params = parse_args(__doc__)
+    plot_params = parse_args()
     plot_hist(**plot_params)
 
 if __name__ == "__main__":

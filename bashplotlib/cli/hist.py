@@ -1,17 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
-"""commandhelp.py
-"""
-import sys
-import os
-from docopt import docopt
-from bashplotlib.utils.helpers import *
-from select import select
-
-HIST_DOCSTRING = """hist - construct a histogram for a continuous variable from your terminal
+"""hist - construct a histogram for a continuous variable from your terminal
 
 Usage:
-    hist [[FILE | -f FILENAME] -t TITLE -b BINS -s SIZE -p MARKERSHAPE -x XLAB -c COLOUR] [-n] [-h]
+    hist [[FILE|-f FILENAME] -t TITLE -b BINS -s SIZE -p MARKERSHAPE -x XLAB -c COLOUR] [-n] [-h]
 
 Arguments:
     FILE                              A file containing a column of numbers [default: stdin]
@@ -34,53 +26,27 @@ Examples:
     $ cat test.csv | hist -t "you're the man now dog"
 
 """
+from docopt import docopt
+from bashplotlib.cli.helpers import read_stdin_or_timeout
 
-# SCATTER_DOCSTRING = """scatter - construct a scatter plot from your terminal
-
-# Usage:
-#     scatter [[FILE | -f FILENAME] -t TITLE -b BINS -s SIZE -p MARKERSHAPE -x XLAB -c COLOUR] [-n] [-h]
-
-
-# """
-
-scatter = {
-    "usage": """scatterplot is a command for making xy plots. it accepts a series of x values and a series of y values in the 
-    following formats:
-        1) a txt file or standard in value w/ 2 comma seperated columns of x,y values
-        2) 2 txt files. 1 w/ designated x values and another with designated y values.
-    
-    scatter -x <xcoords> -y <ycoords>
-    cat <file_with_x_and_y_coords> | scatter
-
-    """
-}
-
-def _read_stdin_or_timeout():
-    timeout = 0.5
-    rlist, _, _ = select([sys.stdin], [], [], timeout)
-    if rlist:
-        return sys.stdin.readlines()
-    else:
-        return None
-
-def parse_args(command_docstring):
+def parse_args():
     """takes __doc__ for given cmd. Returns parsed args using docopt.
     """
-    args = docopt(command_docstring)
+    args = docopt(__doc__)
     for k, v in args.iteritems():
         if v == 'None':
             args[k] = None
     if args['FILE'] and args['FILE'] != args['--file']:
         args['--file'] = args['FILE']
     if args['--file'] == 'stdin':
-        args['--file'] = _read_stdin_or_timeout()
+        args['--file'] = read_stdin_or_timeout()
         if args['--file'] is None:
-            print command_docstring
+            print __doc__
             sys.exit(1)
     plot_params = {
         'bincount': args['--bins'],
         'colour': args['--colour'],
-        'f': args['--file'],
+        'data': args['--file'],
         'height': float(args['--height'].strip()),
         'pch': args['--pch'],
         'showSummary': (not args['--nosummary']),

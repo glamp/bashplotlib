@@ -1,8 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
+"""histogram.py
+"""
 import math
-import sys, os
-from bashplotlib.utils import helpers
-import collections
+import sys
+import os
+from bashplotlib.core import helpers
 
 def calc_bins(n, min_val, max_val, h=None):
     "calculate number of bins for the histogram"
@@ -23,12 +26,11 @@ def read_numbers(numbers):
             numbers = [line for line in open(numbers, 'r') if line.strip()] 
         except Exception, err:
             pass
-    if isinstance(numbers, collections.Iterable):
+    if helpers.isiterable(numbers):
         for number in numbers:
             number = helpers.try_cast_str_to_number(number)
             if number:
                 yield number
-
 
 def plot_hist(data, height=20.0, bincount=None, pch="o", colour="white", title="", xlab=None, showSummary=False):
     """make a histogram for continuous variable.
@@ -57,7 +59,6 @@ def plot_hist(data, height=20.0, bincount=None, pch="o", colour="white", title="
             max_val = number
         mean += number
     mean /= n
-
     bins = list(calc_bins(n, min_val, max_val, bincount))
     hist = {}
     for i in range(len(bins)):
@@ -96,10 +97,7 @@ def plot_hist(data, height=20.0, bincount=None, pch="o", colour="white", title="
                 helpers.printcolor(" ", True, colour)
         print
     xs = hist.keys() * 2
-
     print " "*(nlen+1) + "-"*len(xs)
-
-
     if xlab:
         for i in range(0, nlen):
             helpers.printcolor(" "*(nlen+1), True, colour)
@@ -112,7 +110,6 @@ def plot_hist(data, height=20.0, bincount=None, pch="o", colour="white", title="
             print
     center = max(map(len, map(str, [n, min_val, mean, max_val])))
     center += 15
-    
     if showSummary:
         print
         print "-"*(2 + center)

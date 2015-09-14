@@ -5,7 +5,6 @@ from bashplotlib.cli.hist import __doc__
 from bashplotlib.cli.hist import parse_args
 from bashplotlib.core.histogram import plot_hist
 
-
 def main():
     plot_params = parse_args()
     plot_hist(**plot_params)

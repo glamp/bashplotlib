@@ -17,7 +17,7 @@ setup(
             'hist=bashplotlib.histogram:main',
             'scatter=bashplotlib.scatterplot:main',
         ]
-    }
+    },
     keywords=['plotting', 'console', 'shell'],
     classifiers=[
         'Environment :: Console',

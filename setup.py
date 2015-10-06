@@ -17,6 +17,14 @@ setup(
             'hist=bashplotlib.histogram:main',
             'scatter=bashplotlib.scatterplot:main',
         ]
-    }
+    },
+    keywords=['plotting', 'console', 'shell'],
+    classifiers=[
+        'Environment :: Console',
+        'Intended Audience :: End Users/Desktop',
+        'License :: OSI Approved :: BSD License',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+    ],
 )
 

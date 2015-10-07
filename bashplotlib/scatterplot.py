@@ -46,9 +46,13 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
         if isinstance(f, str):
             f = open(f)
 
-        data = [tuple(map(float, line.strip().split(','))) for line in f]
-        xs = [i[0] for i in data]
-        ys = [i[1] for i in data]
+        data = [tuple(line.strip().split(',')) for line in f]
+        xs = [float(i[0]) for i in data]
+        ys = [float(i[1]) for i in data]
+        if len(data[0]) > 2:
+            cs = [i[2].strip() for i in data]
+        else:
+            cs = None
     else:
         xs = [float(str(row).strip()) for row in open(xs)]
         ys = [float(str(row).strip()) for row in open(ys)]
@@ -67,6 +71,8 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
                 if xp <= x and yp >= y and (xp, yp) not in plotted:
                     point = pch
                     plotted.add((xp, yp))
+                    if cs:
+                        colour = cs[i]
             printcolour(point, True, colour)
         print(" |")
     print("-" * (2 * len(get_scale(xs, False, size)) + 2))

@@ -17,7 +17,8 @@ def get_scale(series, is_y=False, steps=20):
     min_val = min(series)
     max_val = max(series)
     scaled_series = []
-    for x in drange(min_val, max_val, (max_val - min_val) / steps):
+    for x in drange(min_val, max_val, (max_val - min_val) / steps,
+                    include_stop=True):
         if x > 0 and scaled_series and max(scaled_series) < 0:
             scaled_series.append(0.0)
         scaled_series.append(x)
@@ -65,16 +66,9 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
             for (i, (xp, yp)) in enumerate(zip(xs, ys)):
                 if xp <= x and yp >= y and (xp, yp) not in plotted:
                     point = pch
-                    #point = str(i)
                     plotted.add((xp, yp))
-            if x == 0 and y == 0:
-                point = "o"
-            elif x == 0:
-                point = "|"
-            elif y == 0:
-                point = "-"
             printcolour(point, True, colour)
-        print("|")
+        print(" |")
     print("-" * (2 * len(get_scale(xs, False, size)) + 2))
 
 

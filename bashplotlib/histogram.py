@@ -109,7 +109,7 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
         f = open(f).readlines()
 
     min_val, max_val = None, None
-    n, mean = 0.0, 0.0
+    n, mean, sd = 0.0, 0.0, 0.0
 
     for number in read_numbers(f):
         n += 1
@@ -120,6 +120,12 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
         mean += number
 
     mean /= n
+
+    for number in read_numbers(f):
+        sd += (mean - number)**2
+
+    sd /= (n - 1)
+    sd **= 0.5
 
     bins = list(calc_bins(n, min_val, max_val, bincount, binwidth))
     hist = dict((i, 0) for i in range(len(bins)))
@@ -200,6 +206,7 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
         summary = "|" + ("observations: %d" % n).center(center) + "|\n"
         summary += "|" + ("min value: %f" % min_val).center(center) + "|\n"
         summary += "|" + ("mean : %f" % mean).center(center) + "|\n"
+        summary += "|" + ("sd : %f" % sd).center(center) + "|\n"
         summary += "|" + ("max value: %f" % max_val).center(center) + "|\n"
         summary += "-" * (2 + center)
         print(summary)

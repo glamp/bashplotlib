@@ -9,6 +9,7 @@ from __future__ import print_function
 import csv
 import sys
 import optparse
+from os.path import isfile
 from .utils.helpers import *
 from .utils.commandhelp import scatter
 
@@ -56,6 +57,10 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
     else:
         xs = [float(str(row).strip()) for row in open(xs)]
         ys = [float(str(row).strip()) for row in open(ys)]
+        if isfile(colour):
+            cs = [str(row).strip() for row in open(colour)]
+        else:
+            cs = colour
 
     plotted = set()
 
@@ -71,7 +76,7 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
                 if xp <= x and yp >= y and (xp, yp) not in plotted:
                     point = pch
                     plotted.add((xp, yp))
-                    if cs:
+                    if isinstance(cs, list):
                         colour = cs[i]
             printcolour(point, True, colour)
         print(" |")

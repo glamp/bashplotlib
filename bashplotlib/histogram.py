@@ -87,20 +87,42 @@ def run_demo():
 
 
 def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="default", title="", xlab=None, showSummary=False, regular=False):
-    """
-    Make a histogram
+    ''' Plot histogram.
+     1801|       oo
+     1681|       oo
+     1561|      oooo
+      961|      oooo
+      841|      oooo
+      721|     ooooo
+      601|     oooooo
+      241|     oooooo
+      121|    oooooooo
+        1| oooooooooooooo
+          --------------
+    Parameters
+    ----------
+    f : list(number), numpy.ndarray, str(filepath)
+        input array
+    height : float
+        the height of the histogram in # of lines
+    bincount : int
+        number of bins in the histogram
+    binwidth : int
+        width of bins in the histogram
+    pch : str
+        shape of the bars in the plot, e.g 'o'
+    colour : str
+        white,aqua,pink,blue,yellow,green,red,grey,black,default,ENDC
+    title : str
+        title at the top of the plot, None = no title
+    xlab : boolean
+        whether or not to display x-axis labels
+    showSummary : boolean
+        whether or not to display a summary
+    regular : boolean
+        whether or not to start y-labels at 0
 
-    Arguments:
-        height -- the height of the histogram in # of lines
-        bincount -- number of bins in the histogram
-        binwidth -- width of bins in the histogram
-        pch -- shape of the bars in the plot
-        colour -- colour of the bars in the terminal
-        title -- title at the top of the plot
-        xlab -- boolen value for whether or not to display x-axis labels
-        showSummary -- boolean value for whether or not to display a summary
-        regular -- boolean value for whether or not to start y-labels at 0
-    """
+    '''
     if pch is None:
         pch = "o"
 

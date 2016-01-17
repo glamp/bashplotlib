@@ -28,7 +28,58 @@ def get_scale(series, is_y=False, steps=20):
     return scaled_series
 
 
-def plot_scatter(f, xs, ys, size, pch, colour, title):
+def plot_scatter(xs, ys, size=None, pch='o', colour='red', title=None, print_func=print):
+    ''' Scatter plot.
+    ----------------------
+    |                 *   |
+    |               *     |
+    |             *       |
+    |           *         |
+    |         *           |
+    |        *            |
+    |       *             |
+    |      *              |
+    -----------------------
+    Parameters
+    ----------
+    xs : list, numpy.ndarray
+        list of x series
+    ys : list, numpy.ndarray
+        list of y series
+    size : int
+        width of plot
+    pch : str
+        any character to represent a points
+    colour : str, list(str)
+        white,aqua,pink,blue,yellow,green,red,grey,black,default,ENDC
+    title : str
+        title for the plot, None = not show
+    print_func : callable
+        function for print out a string
+
+    '''
+    plotted = set()
+    cs = colour
+
+    if title:
+        print_func(box_text(title, 2 * len(get_scale(xs, False, size)) + 1))
+
+    print_func("-" * (2 * len(get_scale(xs, False, size)) + 2))
+    for y in get_scale(ys, True, size):
+        print_func("|", end=' ')
+        for x in get_scale(xs, False, size):
+            point = " "
+            for (i, (xp, yp)) in enumerate(zip(xs, ys)):
+                if xp <= x and yp >= y and (xp, yp) not in plotted:
+                    point = pch
+                    plotted.add((xp, yp))
+                    if isinstance(cs, list):
+                        colour = cs[i]
+            printcolour(point, True, colour)
+        print_func(" |")
+    print_func("-" * (2 * len(get_scale(xs, False, size)) + 2))
+
+def _plot_scatter(f, xs, ys, size, pch, colour, title):
     """
     Form a complex number.
 
@@ -60,27 +111,7 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
             cs = [str(row).strip() for row in open(colour)]
         else:
             cs = colour
-
-    plotted = set()
-
-    if title:
-        print(box_text(title, 2 * len(get_scale(xs, False, size)) + 1))
-
-    print("-" * (2 * len(get_scale(xs, False, size)) + 2))
-    for y in get_scale(ys, True, size):
-        print("|", end=' ')
-        for x in get_scale(xs, False, size):
-            point = " "
-            for (i, (xp, yp)) in enumerate(zip(xs, ys)):
-                if xp <= x and yp >= y and (xp, yp) not in plotted:
-                    point = pch
-                    plotted.add((xp, yp))
-                    if isinstance(cs, list):
-                        colour = cs[i]
-            printcolour(point, True, colour)
-        print(" |")
-    print("-" * (2 * len(get_scale(xs, False, size)) + 2))
-
+    plot_scatter(xs, ys, size=size, pch=pch, colour=cs, title=title)
 
 def main():
 
@@ -101,7 +132,7 @@ def main():
         opts.f = sys.stdin.readlines()
 
     if opts.f or (opts.x and opts.y):
-        plot_scatter(opts.f, opts.x, opts.y, opts.size, opts.pch, opts.colour, opts.t)
+        _plot_scatter(opts.f, opts.x, opts.y, opts.size, opts.pch, opts.colour, opts.t)
     else:
         print("nothing to plot!")
 

@@ -86,7 +86,9 @@ def run_demo():
     plot_hist(demo_file, height=35.0, bincount=40)
 
 
-def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="default", title="", xlab=None, showSummary=False, regular=False):
+def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o",
+    colour="default", title="", xlab=None, showSummary=False,
+    regular=False, print_func=print):
     ''' Plot histogram.
      1801|       oo
      1681|       oo
@@ -121,7 +123,8 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
         whether or not to display a summary
     regular : boolean
         whether or not to start y-labels at 0
-
+    print_func : callable
+        custom print function
     '''
     if pch is None:
         pch = "o"
@@ -178,8 +181,8 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
     nlen = max(len(str(min_y)), len(str(max_y))) + 1
 
     if title:
-        print(box_text(title, max(len(hist) * 2, len(title)), nlen))
-    print()
+        print_func(box_text(title, max(len(hist) * 2, len(title)), nlen))
+    print_func()
 
     used_labs = set()
     for y in ys:
@@ -190,47 +193,47 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
             used_labs.add(ylab)
         ylab = " " * (nlen - len(ylab)) + ylab + "|"
 
-        print(ylab, end=' ')
+        print_func(ylab, end=' ')
 
         for i in range(len(hist)):
             if int(y) <= hist[i]:
-                printcolour(pch, True, colour)
+                printcolour(pch, True, colour, print_func)
             else:
-                printcolour(" ", True, colour)
-        print('')
+                printcolour(" ", True, colour, print_func)
+        print_func('')
     xs = hist.keys()
 
-    print(" " * (nlen + 1) + "-" * len(xs))
+    print_func(" " * (nlen + 1) + "-" * len(xs))
 
     if xlab:
         xlen = len(str(float((max_y) / height) + max_y))
         for i in range(0, xlen):
-            printcolour(" " * (nlen + 1), True, colour)
+            printcolour(" " * (nlen + 1), True, colour, print_func)
             for x in range(0, len(hist)):
                 num = str(bins[x])
                 if x % 2 != 0:
                     pass
                 elif i < len(num):
-                    print(num[i], end=' ')
+                    print_func(num[i], end=' ')
                 else:
-                    print(" ", end=' ')
-            print('')
+                    print_func(" ", end=' ')
+            print_func('')
 
     center = max(map(len, map(str, [n, min_val, mean, max_val])))
     center += 15
 
     if showSummary:
-        print()
-        print("-" * (2 + center))
-        print("|" + "Summary".center(center) + "|")
-        print("-" * (2 + center))
+        print_func()
+        print_func("-" * (2 + center))
+        print_func("|" + "Summary".center(center) + "|")
+        print_func("-" * (2 + center))
         summary = "|" + ("observations: %d" % n).center(center) + "|\n"
         summary += "|" + ("min value: %f" % min_val).center(center) + "|\n"
         summary += "|" + ("mean : %f" % mean).center(center) + "|\n"
         summary += "|" + ("sd : %f" % sd).center(center) + "|\n"
         summary += "|" + ("max value: %f" % max_val).center(center) + "|\n"
         summary += "-" * (2 + center)
-        print(summary)
+        print_func(summary)
 
 
 def main():

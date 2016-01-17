@@ -75,7 +75,7 @@ def plot_scatter(xs, ys, size=None, pch='o', colour='red', title=None, print_fun
                     plotted.add((xp, yp))
                     if isinstance(cs, list):
                         colour = cs[i]
-            printcolour(point, True, colour)
+            printcolour(point, True, colour, print_func)
         print_func(" |")
     print_func("-" * (2 * len(get_scale(xs, False, size)) + 2))
 

@@ -3,7 +3,7 @@
 """
 Various helpful function for bashplotlib
 """
-
+from __future__ import print_function
 import sys
 
 isiterable = lambda x: hasattr(x, '__iter__') or hasattr(x, '__getitem__')
@@ -32,7 +32,7 @@ def get_colour(colour):
     return bcolours.get(colour, bcolours['ENDC'])
 
 
-def printcolour(text, sameline=False, colour=get_colour("ENDC")):
+def printcolour(text, sameline=False, colour=get_colour("ENDC"), print_func=print):
     """
     Print color text using escape codes
     """
@@ -40,7 +40,10 @@ def printcolour(text, sameline=False, colour=get_colour("ENDC")):
         sep = ''
     else:
         sep = '\n'
-    sys.stdout.write(get_colour(colour) + text + bcolours["ENDC"] + sep)
+    if print_function == print:
+        sys.stdout.write(get_colour(colour) + text + bcolours["ENDC"] + sep)
+    else:
+        print_func(get_colour(colour) + text + bcolours["ENDC"] + sep)
 
 
 def drange(start, stop, step=1.0, include_stop=False):

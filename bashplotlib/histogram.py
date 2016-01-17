@@ -88,7 +88,7 @@ def run_demo():
 
 def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o",
     colour="default", title="", xlab=None, showSummary=False,
-    regular=False, print_func=print):
+    regular=False, return_str=False):
     ''' Plot histogram.
      1801|       oo
      1681|       oo
@@ -123,12 +123,12 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o",
         whether or not to display a summary
     regular : boolean
         whether or not to start y-labels at 0
-    print_func : callable
-        custom print function
+    return_str : boolean
+        return string represent the plot or print it out, default: False
     '''
     if pch is None:
         pch = "o"
-
+    splot = ''
     if isinstance(f, str):
         f = open(f).readlines()
 
@@ -181,8 +181,10 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o",
     nlen = max(len(str(min_y)), len(str(max_y))) + 1
 
     if title:
-        print_func(box_text(title, max(len(hist) * 2, len(title)), nlen))
-    print_func()
+        splot += print_return_str(
+            box_text(title, max(len(hist) * 2, len(title)), nlen),
+            return_str=return_str)
+    splot += print_return_str('', return_str=return_str)
 
     used_labs = set()
     for y in ys:
@@ -193,47 +195,52 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o",
             used_labs.add(ylab)
         ylab = " " * (nlen - len(ylab)) + ylab + "|"
 
-        print_func(ylab, end=' ')
+        splot += print_return_str(ylab, end=' ', return_str=return_str)
 
         for i in range(len(hist)):
             if int(y) <= hist[i]:
-                printcolour(pch, True, colour, print_func)
+                splot += printcolour(pch, True, colour, return_str)
             else:
-                printcolour(" ", True, colour, print_func)
-        print_func('')
+                splot += printcolour(" ", True, colour, return_str)
+        splot += print_return_str('', return_str=return_str)
     xs = hist.keys()
 
-    print_func(" " * (nlen + 1) + "-" * len(xs))
+    splot += print_return_str(" " * (nlen + 1) + "-" * len(xs),
+                              return_str=return_str)
 
     if xlab:
         xlen = len(str(float((max_y) / height) + max_y))
         for i in range(0, xlen):
-            printcolour(" " * (nlen + 1), True, colour, print_func)
+            splot += printcolour(" " * (nlen + 1), True, colour, return_str)
             for x in range(0, len(hist)):
                 num = str(bins[x])
                 if x % 2 != 0:
                     pass
                 elif i < len(num):
-                    print_func(num[i], end=' ')
+                    splot += print_return_str(num[i], end=' ',
+                                              return_str=return_str)
                 else:
-                    print_func(" ", end=' ')
-            print_func('')
+                    splot += print_return_str(" ", end=' ',
+                                            return_str=return_str)
+            splot += print_return_str('', return_str=return_str)
 
     center = max(map(len, map(str, [n, min_val, mean, max_val])))
     center += 15
 
     if showSummary:
-        print_func()
-        print_func("-" * (2 + center))
-        print_func("|" + "Summary".center(center) + "|")
-        print_func("-" * (2 + center))
+        splot += print_return_str('', return_str=return_str)
+        splot += print_return_str("-" * (2 + center), return_str=return_str)
+        splot += print_return_str("|" + "Summary".center(center) + "|",
+                                  return_str=return_str)
+        splot += print_return_str("-" * (2 + center), return_str=return_str)
         summary = "|" + ("observations: %d" % n).center(center) + "|\n"
         summary += "|" + ("min value: %f" % min_val).center(center) + "|\n"
         summary += "|" + ("mean : %f" % mean).center(center) + "|\n"
         summary += "|" + ("sd : %f" % sd).center(center) + "|\n"
         summary += "|" + ("max value: %f" % max_val).center(center) + "|\n"
         summary += "-" * (2 + center)
-        print_func(summary)
+        splot += print_return_str(summary, return_str=return_str)
+    return splot
 
 
 def main():

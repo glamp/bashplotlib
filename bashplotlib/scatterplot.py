@@ -28,7 +28,8 @@ def get_scale(series, is_y=False, steps=20):
     return scaled_series
 
 
-def plot_scatter(xs, ys, size=None, pch='o', colour='red', title=None, print_func=print):
+def plot_scatter(xs, ys, size=None, pch='o',
+                colour='red', title=None, return_str=False):
     ''' Scatter plot.
     ----------------------
     |                 *   |
@@ -54,19 +55,27 @@ def plot_scatter(xs, ys, size=None, pch='o', colour='red', title=None, print_fun
         white,aqua,pink,blue,yellow,green,red,grey,black,default,ENDC
     title : str
         title for the plot, None = not show
-    print_func : callable
-        function for print out a string
-
+    return_str : boolean
+        return string represent the plot or print it out, default: False
     '''
+    splot = ''
     plotted = set()
     cs = colour
 
-    if title:
-        print_func(box_text(title, 2 * len(get_scale(xs, False, size)) + 1))
+    if size is None:
+        size = 13
 
-    print_func("-" * (2 * len(get_scale(xs, False, size)) + 2))
+    if title:
+        splot += print_return_str(
+            box_text(title, 2 * len(get_scale(xs, False, size)) + 1),
+            return_str=return_str)
+
+    # ====== Top line ====== #
+    splot += print_return_str(' ' + "-" * (len(get_scale(xs, False, size)) + 2),
+                              return_str=return_str)
+    # ====== Main plot ====== #
     for y in get_scale(ys, True, size):
-        print_func("|", end=' ')
+        splot += print_return_str("|", end=' ', return_str=return_str)
         for x in get_scale(xs, False, size):
             point = " "
             for (i, (xp, yp)) in enumerate(zip(xs, ys)):
@@ -75,9 +84,12 @@ def plot_scatter(xs, ys, size=None, pch='o', colour='red', title=None, print_fun
                     plotted.add((xp, yp))
                     if isinstance(cs, list):
                         colour = cs[i]
-            printcolour(point, True, colour, print_func)
-        print_func(" |")
-    print_func("-" * (2 * len(get_scale(xs, False, size)) + 2))
+            splot += printcolour(point, True, colour, return_str)
+        splot += print_return_str(" |", return_str=return_str)
+    # ====== Bottom line ====== #
+    splot += print_return_str(' ' + "-" * (len(get_scale(xs, False, size)) + 2),
+                              return_str=return_str)
+    return splot
 
 def _plot_scatter(f, xs, ys, size, pch, colour, title):
     """

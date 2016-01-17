@@ -89,7 +89,8 @@ def plot_scatter(xs, ys, size=None, pch='o',
     # ====== Bottom line ====== #
     splot += print_return_str(' ' + "-" * (len(get_scale(xs, False, size)) + 2),
                               return_str=return_str)
-    return splot
+    if return_str:
+        return splot
 
 def _plot_scatter(f, xs, ys, size, pch, colour, title):
     """

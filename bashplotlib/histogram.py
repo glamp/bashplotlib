@@ -240,7 +240,8 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o",
         summary += "|" + ("max value: %f" % max_val).center(center) + "|\n"
         summary += "-" * (2 + center)
         splot += print_return_str(summary, return_str=return_str)
-    return splot
+    if return_str:
+        return splot
 
 
 def main():

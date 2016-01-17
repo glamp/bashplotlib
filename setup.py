@@ -9,7 +9,7 @@ setup(
     author_email="lamp.greg@gmail.com",
     url="https://github.com/glamp/bashplotlib",
     license="BSD",
-    packages=['bashplotlib'],
+    packages=find_packages(),
     description="plotting in the terminal",
     long_description=open("README.rst").read(),
     entry_points = {

@@ -206,7 +206,7 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
         summary = "|" + ("observations: %d" % n).center(center) + "|\n"
         summary += "|" + ("min value: %f" % min_val).center(center) + "|\n"
         summary += "|" + ("mean : %f" % mean).center(center) + "|\n"
-        summary += "|" + ("sd : %f" % sd).center(center) + "|\n"
+        summary += "|" + ("std dev : %f" % sd).center(center) + "|\n"
         summary += "|" + ("max value: %f" % max_val).center(center) + "|\n"
         summary += "-" * (2 + center)
         print(summary)

@@ -46,7 +46,7 @@ from bashplotlib.histogram import plot_hist
 ```
 <img src="examples/img/histogramhelp.png">
 
-##examples
+## examples
 ```
 $ scatter --file data/texas.txt --pch .
 ```
@@ -62,7 +62,7 @@ $ scatter -x data/x_test.txt -y data/y_test.txt
 ```
 <img src="examples/img/scatter.png">
 
-##todo
+## todo
 
 - sideways numbers for x-axis of histograms
 - colors for individual points

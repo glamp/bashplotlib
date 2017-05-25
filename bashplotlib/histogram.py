@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """
@@ -87,24 +86,49 @@ def run_demo():
     plot_hist(demo_file, height=35.0, bincount=40)
 
 
-def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="default", title="", xlab=None, showSummary=False, regular=False):
-    """
-    Make a histogram
-
-    Arguments:
-        height -- the height of the histogram in # of lines
-        bincount -- number of bins in the histogram
-        binwidth -- width of bins in the histogram
-        pch -- shape of the bars in the plot
-        colour -- colour of the bars in the terminal
-        title -- title at the top of the plot
-        xlab -- boolen value for whether or not to display x-axis labels
-        showSummary -- boolean value for whether or not to display a summary
-        regular -- boolean value for whether or not to start y-labels at 0
-    """
+def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o",
+    colour="default", title="", xlab=None, showSummary=False,
+    regular=False, return_str=False):
+    ''' Plot histogram.
+     1801|       oo
+     1681|       oo
+     1561|      oooo
+      961|      oooo
+      841|      oooo
+      721|     ooooo
+      601|     oooooo
+      241|     oooooo
+      121|    oooooooo
+        1| oooooooooooooo
+          --------------
+    Parameters
+    ----------
+    f : list(number), numpy.ndarray, str(filepath)
+        input array
+    height : float
+        the height of the histogram in # of lines
+    bincount : int
+        number of bins in the histogram
+    binwidth : int
+        width of bins in the histogram
+    pch : str
+        shape of the bars in the plot, e.g 'o'
+    colour : str
+        white,aqua,pink,blue,yellow,green,red,grey,black,default,ENDC
+    title : str
+        title at the top of the plot, None = no title
+    xlab : boolean
+        whether or not to display x-axis labels
+    showSummary : boolean
+        whether or not to display a summary
+    regular : boolean
+        whether or not to start y-labels at 0
+    return_str : boolean
+        return string represent the plot or print it out, default: False
+    '''
     if pch is None:
         pch = "o"
-
+    splot = ''
     if isinstance(f, str):
         f = open(f).readlines()
 
@@ -157,8 +181,10 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
     nlen = max(len(str(min_y)), len(str(max_y))) + 1
 
     if title:
-        print(box_text(title, max(len(hist) * 2, len(title)), nlen))
-    print()
+        splot += print_return_str(
+            box_text(title, max(len(hist) * 2, len(title)), nlen),
+            return_str=return_str)
+    splot += print_return_str('', return_str=return_str)
 
     used_labs = set()
     for y in ys:
@@ -169,47 +195,53 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
             used_labs.add(ylab)
         ylab = " " * (nlen - len(ylab)) + ylab + "|"
 
-        print(ylab, end=' ')
+        splot += print_return_str(ylab, end=' ', return_str=return_str)
 
         for i in range(len(hist)):
             if int(y) <= hist[i]:
-                printcolour(pch, True, colour)
+                splot += printcolour(pch, True, colour, return_str)
             else:
-                printcolour(" ", True, colour)
-        print('')
+                splot += printcolour(" ", True, colour, return_str)
+        splot += print_return_str('', return_str=return_str)
     xs = hist.keys()
 
-    print(" " * (nlen + 1) + "-" * len(xs))
+    splot += print_return_str(" " * (nlen + 1) + "-" * len(xs),
+                              return_str=return_str)
 
     if xlab:
         xlen = len(str(float((max_y) / height) + max_y))
         for i in range(0, xlen):
-            printcolour(" " * (nlen + 1), True, colour)
+            splot += printcolour(" " * (nlen + 1), True, colour, return_str)
             for x in range(0, len(hist)):
                 num = str(bins[x])
                 if x % 2 != 0:
                     pass
                 elif i < len(num):
-                    print(num[i], end=' ')
+                    splot += print_return_str(num[i], end=' ',
+                                              return_str=return_str)
                 else:
-                    print(" ", end=' ')
-            print('')
+                    splot += print_return_str(" ", end=' ',
+                                            return_str=return_str)
+            splot += print_return_str('', return_str=return_str)
 
     center = max(map(len, map(str, [n, min_val, mean, max_val])))
     center += 15
 
     if showSummary:
-        print()
-        print("-" * (2 + center))
-        print("|" + "Summary".center(center) + "|")
-        print("-" * (2 + center))
+        splot += print_return_str('', return_str=return_str)
+        splot += print_return_str("-" * (2 + center), return_str=return_str)
+        splot += print_return_str("|" + "Summary".center(center) + "|",
+                                  return_str=return_str)
+        splot += print_return_str("-" * (2 + center), return_str=return_str)
         summary = "|" + ("observations: %d" % n).center(center) + "|\n"
         summary += "|" + ("min value: %f" % min_val).center(center) + "|\n"
         summary += "|" + ("mean : %f" % mean).center(center) + "|\n"
         summary += "|" + ("std dev : %f" % sd).center(center) + "|\n"
         summary += "|" + ("max value: %f" % max_val).center(center) + "|\n"
         summary += "-" * (2 + center)
-        print(summary)
+        splot += print_return_str(summary, return_str=return_str)
+    if return_str:
+        return splot
 
 
 def main():

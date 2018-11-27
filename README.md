@@ -41,9 +41,11 @@ If you want to use bashplotlib from python, just import histogram and scatterplo
 from bashplotlib.scatterplot import plot_scatter
 ```
 <img src="examples/img/scatterplothelp.png">
+
 ```
 from bashplotlib.histogram import plot_hist
 ```
+
 <img src="examples/img/histogramhelp.png">
 
 ## examples

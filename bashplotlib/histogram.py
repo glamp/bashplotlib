@@ -182,11 +182,12 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
     print(" " * (nlen + 1) + "-" * len(xs))
 
     if xlab:
-        xlen = len(str(float((max_y) / height) + max_y))
+        labels = abbreviate([str(b) for b in bins])
+        xlen = len(labels[0])
         for i in range(0, xlen):
             printcolour(" " * (nlen + 1), True, colour)
             for x in range(0, len(hist)):
-                num = str(bins[x])
+                num = labels[x]
                 if x % 2 != 0:
                     pass
                 elif i < len(num):

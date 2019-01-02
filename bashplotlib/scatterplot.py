@@ -28,37 +28,7 @@ def get_scale(series, is_y=False, steps=20):
     return scaled_series
 
 
-def plot_scatter(f, xs, ys, size, pch, colour, title):
-    """
-    Form a complex number.
-
-    Arguments:
-        f -- comma delimited file w/ x,y coordinates
-        xs -- if f not specified this is a file w/ x coordinates
-        ys -- if f not specified this is a filew / y coordinates
-        size -- size of the plot
-        pch -- shape of the points (any character)
-        colour -- colour of the points
-        title -- title of the plot
-    """
-
-    cs = None
-    if f:
-        if isinstance(f, str):
-            with open(f) as fh:
-                data = [tuple(line.strip().split(',')) for line in fh]
-        else:
-            data = [tuple(line.strip().split(',')) for line in f]
-        xs = [float(i[0]) for i in data]
-        ys = [float(i[1]) for i in data]
-        if len(data[0]) > 2:
-            cs = [i[2].strip() for i in data]
-    else:
-        with open(xs) as fh:
-            xs = [float(str(row).strip()) for row in fh]
-        with open(ys) as fh:
-            ys = [float(str(row).strip()) for row in fh]
-
+def _plot_scatter(xs, ys, size, pch, colour, title, cs):
     plotted = set()
 
     if title:
@@ -78,6 +48,41 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
             printcolour(point, True, colour)
         print(" |")
     print("-" * (2 * len(get_scale(xs, False, size)) + 2))
+
+def plot_scatter(f, xs, ys, size, pch, colour, title):
+    """
+    Form a complex number.
+
+    Arguments:
+        f -- comma delimited file w/ x,y coordinates
+        xs -- if f not specified this is a file w/ x coordinates
+        ys -- if f not specified this is a filew / y coordinates
+        size -- size of the plot
+        pch -- shape of the points (any character)
+        colour -- colour of the points
+        title -- title of the plot
+    """
+    cs = None
+    if f:
+        if isinstance(f, str):
+            with open(f) as fh:
+                data = [tuple(line.strip().split(',')) for line in fh]
+        else:
+            data = [tuple(line.strip().split(',')) for line in f]
+        xs = [float(i[0]) for i in data]
+        ys = [float(i[1]) for i in data]
+        if len(data[0]) > 2:
+            cs = [i[2].strip() for i in data]
+    elif isinstance(xs, list) and isinstance(ys, list):
+        pass
+    else:
+        with open(xs) as fh:
+            xs = [float(str(row).strip()) for row in fh]
+        with open(ys) as fh:
+            ys = [float(str(row).strip()) for row in fh]
+
+    _plot_scatter(xs, ys, size, pch, colour, title, cs)
+    
 
 
 def main():

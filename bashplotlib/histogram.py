@@ -42,8 +42,9 @@ def read_numbers(numbers):
         for number in numbers:
             yield float(str(number).strip())
     else:
-        for number in open(numbers):
-            yield float(number.strip())
+        with open(numbers) as fh:
+            for number in fh:
+                yield float(number.strip())
 
 
 def run_demo():
@@ -106,7 +107,8 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
         pch = "o"
 
     if isinstance(f, str):
-        f = open(f).readlines()
+        with open(f) as fh:
+            f = fh.readlines()
 
     min_val, max_val = None, None
     n, mean, sd = 0.0, 0.0, 0.0

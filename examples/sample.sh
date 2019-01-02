@@ -22,6 +22,9 @@ hist --file "${dir}/data/exp.txt" --colour blue
 echo 'changing the shape of the point'
 hist --file "${dir}/data/exp.txt" --pch .
 
+echo 'adding x-labels'
+hist --file "${dir}/data/exp.txt" --pch . --xlab
+
 #echo 'using stdin'
 #curl -sL https://dl.dropbox.com/u/49171662/example.txt | hist
 

@@ -64,6 +64,18 @@ def drange(start, stop, step=1.0, include_stop=False):
             r = round(r, 10)
 
 
+def abbreviate(labels, rfill=' '):
+    """
+    Abbreviate labels without introducing ambiguities.
+    """
+    max_len = max(len(l) for l in labels)
+    for i in range(1, max_len):
+        abbrev = [l[:i].ljust(i, rfill) for l in labels]
+        if len(abbrev) == len(set(abbrev)):
+            break
+    return abbrev
+
+
 def box_text(text, width, offset=0):
     """
     Return text inside an ascii textbox

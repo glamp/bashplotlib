@@ -65,9 +65,10 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
     cs = None
     if f:
         if isinstance(f, str):
-            f = open(f)
-
-        data = [tuple(line.strip().split(',')) for line in f]
+            with open(f) as fh:
+                data = [tuple(line.strip().split(',')) for line in fh]
+        else:
+            data = [tuple(line.strip().split(',')) for line in f]
         xs = [float(i[0]) for i in data]
         ys = [float(i[1]) for i in data]
         if len(data[0]) > 2:
@@ -75,8 +76,10 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
     elif isinstance(xs, list) and isinstance(ys, list):
         pass
     else:
-        xs = [float(str(row).strip()) for row in open(xs)]
-        ys = [float(str(row).strip()) for row in open(ys)]
+        with open(xs) as fh:
+            xs = [float(str(row).strip()) for row in fh]
+        with open(ys) as fh:
+            ys = [float(str(row).strip()) for row in fh]
 
     _plot_scatter(xs, ys, size, pch, colour, title, cs)
     

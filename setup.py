@@ -2,6 +2,9 @@
 
 from setuptools import find_packages, setup
 
+with open("README.rst") as fh:
+    long_description = fh.read()
+
 setup(
     name="bashplotlib",
     version="0.6.5",
@@ -11,7 +14,7 @@ setup(
     license="BSD",
     packages=find_packages(),
     description="plotting in the terminal",
-    long_description=open("README.rst").read(),
+    long_description=long_description,
     entry_points = {
         'console_scripts': [
             'hist=bashplotlib.histogram:main',

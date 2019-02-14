@@ -13,7 +13,7 @@ $ pip install bashplotlib
 ```
 ### install from source
 ```
-$ git clone git@github.com:glamp/bashplotlib.git
+$ git clone https://github.com/glamp/bashplotlib.git
 $ cd bashplotlib
 $ python setup.py install
 ```

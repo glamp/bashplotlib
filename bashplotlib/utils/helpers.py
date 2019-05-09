@@ -26,22 +26,24 @@ bcolours = {
 colour_help = ', '.join([colour for colour in bcolours if colour != "ENDC"])
 
 
-def get_colour(colour):
+def get_colour(colour, default="default"):
     """
     Get the escape code sequence for a colour
     """
-    return bcolours.get(colour, bcolours['ENDC'])
+    return bcolours.get(colour, bcolours[default])
 
 
-def printcolour(text, sameline=False, colour=get_colour("ENDC")):
+def printcolour(text, sameline=False, colour="default"):
     """
     Print color text using escape codes
     """
-    if sameline:
-        sep = ''
+    sep = '' if sameline else '\n'
+
+    # If no colour set, do not print color ESC characters
+    if get_colour(colour) == get_colour("ENDC"):
+        sys.stdout.write(text + sep)
     else:
-        sep = '\n'
-    sys.stdout.write(get_colour(colour) + text + bcolours["ENDC"] + sep)
+        sys.stdout.write(get_colour(colour) + text + get_colour("ENDC") + sep)
 
 
 def drange(start, stop, step=1.0, include_stop=False):

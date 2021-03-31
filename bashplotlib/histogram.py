@@ -99,7 +99,7 @@ def plot_hist(f, height=20.0, bincount=None, binwidth=None, pch="o", colour="def
         pch -- shape of the bars in the plot
         colour -- colour of the bars in the terminal
         title -- title at the top of the plot
-        xlab -- boolen value for whether or not to display x-axis labels
+        xlab -- boolean value for whether or not to display x-axis labels
         showSummary -- boolean value for whether or not to display a summary
         regular -- boolean value for whether or not to start y-labels at 0
     """

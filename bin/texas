@@ -3,7 +3,5 @@
 from __future__ import print_function
 import os
 
-_ROOT = os.path.abspath(os.path.dirname(__file__))
-
-texas = os.path.join(_ROOT, "../bashplotlib", "data", "texas.txt")
+texas = os.path.join(os.environ["HOME"], "bashplotlib/examples/data/texas.txt")
 print(open(texas).read().strip())

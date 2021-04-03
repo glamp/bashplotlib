@@ -3,8 +3,9 @@
 dir=$(dirname "$0")
 
 if [ ! -d "${dir}/data" ]; then 
-    echo 'downloading data'
-    "${dir}/downloaddata.sh"
+    echo 'Sample data is needed'
+    echo 'Run "hist --demo" to download'
+    exit 1
 fi
 
 echo 'plotting coordinates'

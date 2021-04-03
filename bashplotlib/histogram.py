@@ -12,9 +12,22 @@ import os
 import sys
 import math
 import optparse
+import requests
 from os.path import dirname
+from multiprocessing import Pool
+
 from .utils.helpers import *
 from .utils.commandhelp import hist
+
+sample_files = [('exp.txt', 'yuxlaj8okcjta9t', ''),
+                ('lower48.txt', 'cbf5skx34grlwy6', ''),
+                ('x_test.txt', 'gsu2y9vqnx5ps5i', ''),
+                ('y_test.txt', 'mlt4gfqr6n24kxj', ''),
+                ('texas.txt', 'gsu2y9vqnx5ps5i', ''),
+                ('million.txt', 'jjeubxlxuqkzkeq/5W6zkUZXww/', 'h')]
+
+download_base = 'https://dl.dropbox.com/s{}/{}/{}?dl=1'
+download_dir = os.path.join(os.environ['HOME'], 'bashplotlib/examples/data')
 
 
 def calc_bins(n, min_val, max_val, h=None, binwidth=None):
@@ -47,12 +60,22 @@ def read_numbers(numbers):
                 yield float(number.strip())
 
 
+def sample_data_downloader(filename, fileid, prefix):
+    req = requests.get(download_base.format(prefix, fileid, filename))
+    filepath = os.path.join(download_dir, filename)
+    with open(filepath, 'w') as f:
+        f.write(req.text)
+
+
 def run_demo():
     """
     Run a demonstration
     """
-    module_dir = dirname(dirname(os.path.realpath(__file__)))
-    demo_file = os.path.join(module_dir, 'examples/data/exp.txt')
+    if not os.path.exists(download_dir):
+        os.mkdir(download_dir)
+        with Pool() as pool:
+            pool.starmap(sample_data_downloader, sample_files)
+    demo_file = os.path.join(download_dir, 'exp.txt')
 
     if not os.path.isfile(demo_file):
         sys.stderr.write("demo input file not found!\n")

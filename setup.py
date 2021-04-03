@@ -29,5 +29,7 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
     ],
+    install_requires={'requests':'examples'},
+    dependency_links=['https://github.com/kennethreitz/requests'],
 )
 

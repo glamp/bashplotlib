@@ -49,7 +49,7 @@ def _plot_scatter(xs, ys, size, pch, colour, title, cs):
         print(" |")
     print("-" * (2 * len(get_scale(xs, False, size)) + 2))
 
-def plot_scatter(f, xs, ys, size, pch, colour, title):
+def plot_scatter(f, xs, ys, size, pch, colour, title, delimiter=','):
     """
     Form a complex number.
 
@@ -66,9 +66,9 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
     if f:
         if isinstance(f, str):
             with open(f) as fh:
-                data = [tuple(line.strip().split(',')) for line in fh]
+                data = [tuple(line.strip().split(delimiter)) for line in fh]
         else:
-            data = [tuple(line.strip().split(',')) for line in f]
+            data = [tuple(line.strip().split(delimiter)) for line in f]
         xs = [float(i[0]) for i in data]
         ys = [float(i[1]) for i in data]
         if len(data[0]) > 2:
@@ -90,6 +90,7 @@ def main():
     parser = optparse.OptionParser(usage=scatter['usage'])
 
     parser.add_option('-f', '--file', help='a csv w/ x and y coordinates', default=None, dest='f')
+    parser.add_option('-d', '--delimiter', help='delimiter between x & y values in input file', default=',')
     parser.add_option('-t', '--title', help='title for the chart', default="", dest='t')
     parser.add_option('-x', help='x coordinates', default=None, dest='x')
     parser.add_option('-y', help='y coordinates', default=None, dest='y')
@@ -104,7 +105,7 @@ def main():
         opts.f = sys.stdin.readlines()
 
     if opts.f or (opts.x and opts.y):
-        plot_scatter(opts.f, opts.x, opts.y, opts.size, opts.pch, opts.colour, opts.t)
+        plot_scatter(opts.f, opts.x, opts.y, opts.size, opts.pch, opts.colour, opts.t, opts.delimiter)
     else:
         print("nothing to plot!")
 

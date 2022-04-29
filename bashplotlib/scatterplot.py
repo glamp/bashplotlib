@@ -73,8 +73,10 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
         ys = [float(i[1]) for i in data]
         if len(data[0]) > 2:
             cs = [i[2].strip() for i in data]
-    elif isinstance(xs, list) and isinstance(ys, list):
-        pass
+    # try to convert any iterable data to list, so we can use any iterable object like pandas dataframe or numpy array
+    elif isiterable(xs) and isiterable(ys): 
+        xs = [i for i in xs]
+        ys = [i for i in ys]
     else:
         with open(xs) as fh:
             xs = [float(str(row).strip()) for row in fh]

@@ -7,6 +7,7 @@ Plotting terminal based scatterplots
 
 from __future__ import print_function
 import csv
+import os
 import sys
 import optparse
 from .utils.helpers import *
@@ -62,6 +63,7 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
         colour -- colour of the points
         title -- title of the plot
     """
+    path_allowed_types = (str, bytes, os.PathLike)
     cs = None
     if f:
         if isinstance(f, str):
@@ -74,14 +76,16 @@ def plot_scatter(f, xs, ys, size, pch, colour, title):
         if len(data[0]) > 2:
             cs = [i[2].strip() for i in data]
     # try to convert any iterable data to list, so we can use any iterable object like pandas dataframe or numpy array
-    elif isiterable(xs) and isiterable(ys): 
-        xs = [i for i in xs]
-        ys = [i for i in ys]
-    else:
+    elif type(xs) in path_allowed_types and type(ys) in path_allowed_types:
         with open(xs) as fh:
             xs = [float(str(row).strip()) for row in fh]
         with open(ys) as fh:
             ys = [float(str(row).strip()) for row in fh]
+    elif isiterable(xs) and isiterable(ys): 
+        xs = [i for i in xs]
+        ys = [i for i in ys]
+    else:
+        raise ValueError("Invalid data types {} or {} must be iterable, str, or pathlike".format(type(xs), type(ys)))
 
     _plot_scatter(xs, ys, size, pch, colour, title, cs)
     

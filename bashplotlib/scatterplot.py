@@ -34,7 +34,7 @@ def _plot_scatter(xs, ys, size, pch, colour, title, cs):
     if title:
         print(box_text(title, 2 * len(get_scale(xs, False, size)) + 1))
 
-    print("-" * (2 * len(get_scale(xs, False, size)) + 2))
+    print("+" + "-" * (2 * len(get_scale(xs, False, size)) + 3)  + "+")
     for y in get_scale(ys, True, size):
         print("|", end=' ')
         for x in get_scale(xs, False, size):
@@ -46,8 +46,8 @@ def _plot_scatter(xs, ys, size, pch, colour, title, cs):
                     if cs:
                         colour = cs[i]
             printcolour(point, True, colour)
-        print(" |")
-    print("-" * (2 * len(get_scale(xs, False, size)) + 2))
+        print(" "*(size+4) + "|")
+    print("+" + "-" * (2 * len(get_scale(xs, False, size)) + 3) + "+")
 
 def plot_scatter(f, xs, ys, size, pch, colour, title):
     """
